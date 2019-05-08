@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="create-item">
+        <div>
+            <label for="newItem">Name new alarm item: </label>
+            <input type="text" id="newItemName">
+        </div>
+        <div class="newItemItem">
+            <label for="newItemItemWhat">Full path in pc: </label>
+            <input type="text" class="newItemItemWhat">
+            
+            <label for="newItemItemTimes">Times to repeat: </label>
+            <input type="text" class="newItemItemTimes">
+            
+            <label for="newItemItemTime">Time to play(s): </label>
+            <input type="text" class="newItemItemTime">
+        </div>
+        
+    </div>
+    <div class="container">
+
+
+
+        <p>without loop</p>
+        <audio src="C:/Users/pc/Desktop/audios/Sleep_Away.mp3" controls>
+            <p>Your browser doesn't support HTML5 audio.</p>
+        </audio>
+
+        <p>with loop and id</p>
+        <audio src="C:/Users/pc/Desktop/audios/explosion.mp3" controls loop id="audio1">
+            <p>Your browser doesn't support HTML5 audio.</p>
+        </audio>
+    </div>
+    <script src="JS/script.js"></script>
+</body>
+
+</html>

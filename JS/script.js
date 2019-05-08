@@ -1,39 +1,62 @@
 (
-    function() {
-        var newItemItem = document.getElementsByClassName("newItemItem")[0];
-        var newItemItemWhat = document.getElementsByClassName("newItemItemWhat")[0];
-        var newItemItemTimes = document.getElementsByClassName("newItemItemTimes")[0];
-        var newItemItemTime = document.getElementsByClassName("newItemItemTime")[0];
+    function () {
+        var newItemRowDivs = document.getElementsByClassName("item-row");
         
-        newItemItemWhat.addEventListener("change", function() {
-            newItemItemChange();
-        });
+        var itemRowWhatInputs;
+        var itemRowTimesInputs;
+        var itemRowTimeSecInputs;
         
-        newItemItemTime.addEventListener("change", function() {
-            newItemItemChange();
-        });
+        setNewItemInputs();
         
-        newItemItemTimes.addEventListener("change", function() {
-            newItemItemChange();
-        });
+        var itemRowWhatLabels = document.querySelectorAll("label[for='item-row-what']");
+        console.log(itemRowWhatLabels)
         
-        function newItemItemChange() {
-            if (newItemItemWhat.value != "" && (newItemItemTime.value != "" || newItemItemTimes.value != "")) {
-                
-                var newCreateItemItem = document.createElement("div");
+
+        addActionsToLastRow();
+
+
+        function setNewItemInputs() {
+            itemRowWhatInputs = document.getElementsByClassName("item-row-what");
+            itemRowTimesInputs = document.getElementsByClassName("item-row-times");
+            itemRowTimeSecInputs = document.getElementsByClassName("item-row-time-sec");
+        }
+
+        function newItemRowChange() {
+            if (isNewItemNewRowNeeded()) {
+
+                var newItemRow = document.createElement("div");
+                newItemRow.classList.add("item-row");
                 var input1 = document.createElement("input");
                 var input2 = document.createElement("input");
                 var input3 = document.createElement("input");
-                
-                newCreateItemItem.appendChild(input1);
-                newCreateItemItem.appendChild(input2);
-                newCreateItemItem.appendChild(input3);
-                document.getElementById("create-item").appendChild(newCreateItemItem);
+
+                newItemRow.appendChild(input1);
+                newItemRow.appendChild(input2);
+                newItemRow.appendChild(input3);
+                document.getElementById("create-item").appendChild(newItemRow);
             }
         }
-        
-        console.log(newItemItem);
-        
-        
+
+        function isNewItemNewRowNeeded() {
+            return itemRowWhatInputs[getNewItemRowCount() - 1].value != "" && (itemRowTimeSecInputs[getNewItemRowCount() - 1].value != "" || itemRowTimesInputs[getNewItemRowCount() - 1].value != "");
+        }
+
+        function getNewItemRowCount() {
+            return itemRowWhatInputs.length;
+        }
+
+        function addActionsToLastRow() {
+            itemRowWhatInputs[getNewItemRowCount() - 1].addEventListener("change", function () {
+                newItemRowChange();
+            });
+
+            itemRowTimeSecInputs[getNewItemRowCount() - 1].addEventListener("change", function () {
+                newItemRowChange();
+            });
+
+            itemRowTimesInputs[getNewItemRowCount() - 1].addEventListener("change", function () {
+                newItemRowChange();
+            });
+        }
     }
 )();

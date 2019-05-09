@@ -34,7 +34,6 @@
 
         function newItemRowChange() {
             if (isNewItemNewRowNeeded(getNewItemRowCount())) {
-                console.log(inputsItemRowTimes[0].value);
 
                 var newItemRow = document.createElement("div");
                 newItemRow.classList.add("item-row");
@@ -73,8 +72,10 @@
                 
                 setNewItemInputs();
                 setNewItemLabels();
-                addActionsToLastRow(getNewItemRowCount());
+                newItemRowDivs = document.getElementsByClassName("item-row");
+                console.log(newItemRowDivs);
                 
+                addActionsToLastRow(getNewItemRowCount());
             }
         }
 

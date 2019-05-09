@@ -10,6 +10,9 @@
         var labelsItemRowWhat = [];
         var labelsItemRowTimes = [];
         var labelsItemRowTimeSec = [];
+        
+        var clearedValuesTimes = [];
+        var clearedValuesTimeSec = [];
 
         var addNewItemButton = document.getElementById("add-new-item");
 
@@ -113,6 +116,7 @@
 
             inputsItemRowTimes[rowLength - 1].addEventListener("keyup", function () {
                 if (inputsItemRowTimes[rowLength - 1].value != "") {
+                    clearedValuesTimeSec[rowLength - 1] = inputsItemRowTimeSec[rowLength - 1].value;
                     inputsItemRowTimeSec[rowLength - 1].value = "";
                     newItemRowChange();
                 }
@@ -120,6 +124,7 @@
 
             inputsItemRowTimeSec[rowLength - 1].addEventListener("keyup", function () {
                 if (inputsItemRowTimeSec[rowLength - 1].value != "") {
+                    clearedValuesTimes[rowLength - 1] = inputsItemRowTimes[rowLength - 1].value;
                     inputsItemRowTimes[rowLength - 1].value = "";
                     newItemRowChange();
                 }

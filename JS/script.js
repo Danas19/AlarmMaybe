@@ -2,23 +2,32 @@
     function () {
         var newItemRowDivs = document.getElementsByClassName("item-row");
         
-        var itemRowWhatInputs;
-        var itemRowTimesInputs;
-        var itemRowTimeSecInputs;
+        var itemRowWhatInputs = [];
+        var itemRowTimesInputs = [];
+        var itemRowTimeSecInputs = [];
         
-        setNewItemInputs();
+        var itemRowWhatLabels = [];
+        var itemRowTimesLabels = [];
+        var itemRowTimeSecLabels = [];
         
-        var itemRowWhatLabels = document.querySelectorAll("label[for='item-row-what']");
-        console.log(itemRowWhatLabels)
+        setNewItemInputs(1);
+        setNewItemLabels(1);
         
-
-        addActionsToLastRow();
+        console.log(itemRowTimeSecLabels);
+        
+        addActionsToLastRow(1);
 
 
         function setNewItemInputs() {
             itemRowWhatInputs = document.getElementsByClassName("item-row-what");
             itemRowTimesInputs = document.getElementsByClassName("item-row-times");
             itemRowTimeSecInputs = document.getElementsByClassName("item-row-time-sec");
+        }
+        
+        function setNewItemLabels(rowLength) {
+            itemRowWhatLabels = document.querySelectorAll("label[for='item-row-what']");
+            itemRowTimesLabels = document.querySelectorAll("label[for='item-row-times']");
+            itemRowTimeSecLabels = document.querySelectorAll("label[for='item-row-time-sec']");
         }
 
         function newItemRowChange() {
@@ -45,16 +54,16 @@
             return itemRowWhatInputs.length;
         }
 
-        function addActionsToLastRow() {
-            itemRowWhatInputs[getNewItemRowCount() - 1].addEventListener("change", function () {
+        function addActionsToLastRow(rowLength) {
+            itemRowWhatInputs[rowLength - 1].addEventListener("change", function () {
                 newItemRowChange();
             });
 
-            itemRowTimeSecInputs[getNewItemRowCount() - 1].addEventListener("change", function () {
+            itemRowTimeSecInputs[rowLength - 1].addEventListener("change", function () {
                 newItemRowChange();
             });
 
-            itemRowTimesInputs[getNewItemRowCount() - 1].addEventListener("change", function () {
+            itemRowTimesInputs[rowLength - 1].addEventListener("change", function () {
                 newItemRowChange();
             });
         }

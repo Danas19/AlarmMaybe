@@ -87,11 +87,17 @@
             });
 
             itemRowTimeSecInputs[rowLength - 1].addEventListener("keydown", function () {
-                newItemRowChange();
+                if (itemRowTimeSecInputs[rowLength - 1].value != "") {
+                    itemRowTimesInputs[rowLength - 1].value = "";
+                    newItemRowChange();
+                }
             });
 
             itemRowTimesInputs[rowLength - 1].addEventListener("keydown", function () {
-                newItemRowChange();
+                if (itemRowTimesInputs[rowLength - 1].value != "") {
+                    itemRowTimeSecInputs[rowLength - 1].value = "";
+                    newItemRowChange();
+                }
             });
         }
     }

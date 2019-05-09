@@ -2,13 +2,13 @@
     function () {
         var newItemRowDivs = document.getElementsByClassName("item-row");
         
-        var itemRowWhatInputs = [];
-        var itemRowTimesInputs = [];
-        var itemRowTimeSecInputs = [];
+        var inputsItemRowWhat = [];
+        var inputsItemRowTimes = [];
+        var inputsItemRowTimeSec = [];
         
-        var itemRowWhatLabels = [];
-        var itemRowTimesLabels = [];
-        var itemRowTimeSecLabels = [];
+        var labelsItemRowWhat = [];
+        var labelsItemRowTimes = [];
+        var labelsItemRowTimeSec = [];
         
         
         setNewItemInputs();
@@ -18,19 +18,18 @@
 
 
         function setNewItemInputs() {
-            itemRowWhatInputs = document.getElementsByClassName("item-row-what");
-            itemRowTimesInputs = document.getElementsByClassName("item-row-times");
-            itemRowTimeSecInputs = document.getElementsByClassName("item-row-time-sec");
+            inputsItemRowWhat = document.getElementsByClassName("item-row-what");
+            inputsItemRowTimes = document.getElementsByClassName("item-row-times");
+            inputsItemRowTimeSec = document.getElementsByClassName("item-row-time-sec");
         }
         
         function setNewItemLabels() {
-            itemRowWhatLabels = document.querySelectorAll("label[for='item-row-what']");
-            itemRowTimesLabels = document.querySelectorAll("label[for='item-row-times']");
-            itemRowTimeSecLabels = document.querySelectorAll("label[for='item-row-time-sec']");
+            labelsItemRowWhat = document.querySelectorAll("label[for='item-row-what']");
+            labelsItemRowTimes = document.querySelectorAll("label[for='item-row-times']");
+            labelsItemRowTimeSec = document.querySelectorAll("label[for='item-row-time-sec']");
         }
 
         function newItemRowChange() {
-            console.log(itemRowTimeSecInputs[getNewItemRowCount() - 1].value !== "" || itemRowTimesInputs[getNewItemRowCount() - 1].value !== "");
             if (isNewItemNewRowNeeded(getNewItemRowCount())) {
 
                 var newItemRow = document.createElement("div");
@@ -74,31 +73,32 @@
         }
 
         function isNewItemNewRowNeeded(rowLength) {
-            return itemRowWhatInputs[rowLength - 1].value !== "" && (itemRowTimeSecInputs[rowLength - 1].value !== "" || itemRowTimesInputs[rowLength - 1].value !== "");
+            return inputsItemRowWhat[rowLength - 1].value !== "" && (inputsItemRowTimes[rowLength - 1].value !== "" || inputsItemRowTimeSec[rowLength - 1].value !== "");
         }
 
         function getNewItemRowCount() {
-            return itemRowWhatInputs.length;
+            return inputsItemRowWhat.length;
         }
 
         function addActionsToLastRow(rowLength) {
-            itemRowWhatInputs[rowLength - 1].addEventListener("keydown", function () {
+            inputsItemRowWhat[rowLength - 1].addEventListener("keydown", function () {
                 newItemRowChange();
             });
-
-            itemRowTimeSecInputs[rowLength - 1].addEventListener("keydown", function () {
-                if (itemRowTimeSecInputs[rowLength - 1].value != "") {
-                    itemRowTimesInputs[rowLength - 1].value = "";
+            
+            inputsItemRowTimes[rowLength - 1].addEventListener("keydown", function () {
+                if (inputsItemRowTimes[rowLength - 1].value != "") {
+                    inputsItemRowTimeSec[rowLength - 1].value = "";
                     newItemRowChange();
                 }
             });
 
-            itemRowTimesInputs[rowLength - 1].addEventListener("keydown", function () {
-                if (itemRowTimesInputs[rowLength - 1].value != "") {
-                    itemRowTimeSecInputs[rowLength - 1].value = "";
+            inputsItemRowTimeSec[rowLength - 1].addEventListener("keydown", function () {
+                if (inputsItemRowTimeSec[rowLength - 1].value != "") {
+                    inputsItemRowTimes[rowLength - 1].value = "";
                     newItemRowChange();
                 }
             });
+            
         }
     }
 )();

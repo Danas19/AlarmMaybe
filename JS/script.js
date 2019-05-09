@@ -88,18 +88,18 @@
         }
 
         function addActionsToLastRow(rowLength) {
-            inputsItemRowWhat[rowLength - 1].addEventListener("keydown", function () {
+            inputsItemRowWhat[rowLength - 1].addEventListener("keyup", function () {
                 newItemRowChange();
             });
             
-            inputsItemRowTimes[rowLength - 1].addEventListener("keydown", function () {
+            inputsItemRowTimes[rowLength - 1].addEventListener("keyup", function () {
                 if (inputsItemRowTimes[rowLength - 1].value != "") {
                     inputsItemRowTimeSec[rowLength - 1].value = "";
                     newItemRowChange();
                 }
             });
 
-            inputsItemRowTimeSec[rowLength - 1].addEventListener("keydown", function () {
+            inputsItemRowTimeSec[rowLength - 1].addEventListener("keyup", function () {
                 if (inputsItemRowTimeSec[rowLength - 1].value != "") {
                     inputsItemRowTimes[rowLength - 1].value = "";
                     newItemRowChange();

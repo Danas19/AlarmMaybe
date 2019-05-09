@@ -1,5 +1,6 @@
 (
     function () {
+        var createItemDiv = document.getElementById("create-item");
         var newItemRowDivs = document.getElementsByClassName("item-row");
         
         var inputsItemRowWhat = [];
@@ -9,6 +10,8 @@
         var labelsItemRowWhat = [];
         var labelsItemRowTimes = [];
         var labelsItemRowTimeSec = [];
+        
+        var addNewItemButton = document.getElementById("add-new-item");
         
         
         setNewItemInputs();
@@ -31,6 +34,7 @@
 
         function newItemRowChange() {
             if (isNewItemNewRowNeeded(getNewItemRowCount())) {
+                console.log(inputsItemRowTimes[0].value);
 
                 var newItemRow = document.createElement("div");
                 newItemRow.classList.add("item-row");
@@ -64,11 +68,13 @@
                 newItemRow.appendChild(input2);
                 newItemRow.appendChild(label3);
                 newItemRow.appendChild(input3);
-                document.getElementById("create-item").appendChild(newItemRow);
+                createItemDiv.appendChild(newItemRow);
+                createItemDiv.appendChild(addNewItemButton);
                 
                 setNewItemInputs();
                 setNewItemLabels();
                 addActionsToLastRow(getNewItemRowCount());
+                
             }
         }
 

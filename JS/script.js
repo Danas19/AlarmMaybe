@@ -25,6 +25,11 @@
         addActionsToLastRow(1);
         
         disableEnableAllRowInputs(true);
+        
+        console.log(localStorage.getItem('item'));
+        addNewItemButton.addEventListener("click", function() {
+            localStorage.setItem('item', createItemDiv);
+        });
 
         newItemNameInput.addEventListener("keyup", function () {
             if (newItemNameInput.value === "") {

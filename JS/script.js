@@ -24,7 +24,7 @@
             itemRowTimeSecInputs = document.getElementsByClassName("item-row-time-sec");
         }
         
-        function setNewItemLabels(rowLength) {
+        function setNewItemLabels() {
             itemRowWhatLabels = document.querySelectorAll("label[for='item-row-what']");
             itemRowTimesLabels = document.querySelectorAll("label[for='item-row-times']");
             itemRowTimeSecLabels = document.querySelectorAll("label[for='item-row-time-sec']");

@@ -31,9 +31,6 @@
         });
 
         function setLocalStorageItems() {
-            //            if (localStorage.getItem('items') === undefined) {
-            //                localStorage.setItem('items', Json.stringify([]));
-            //            }
             localStorageItems = JSON.parse(localStorage.getItem('items'));
             if (!Array.isArray(localStorageItems)) {
                 localStorageItems = [];
@@ -52,6 +49,7 @@
             var newItemRowsValues = [];
             for (var i = 0; i < newItemRowDivs.length - 1; i++) {
                 newItemRowsValues[i] = {
+                    itemName: newItemNameInput.value,
                     valueItemRowWhat: inputsItemRowWhat[i].value,
                     valueItemRowTimes: inputsItemRowTimes[i].value,
                     valueItemRowTimeSec: inputsItemRowTimeSec[i].value,
@@ -175,6 +173,7 @@
             });
 
             inputsItemRowTimes[rowLength - 1].addEventListener("keyup", function () {
+                console.log(rowLength);
                 if (inputsItemRowTimes[rowLength - 1].value != "") {
                     clearedValuesTimeSec[rowLength - 1] = inputsItemRowTimeSec[rowLength - 1].value;
                     inputsItemRowTimeSec[rowLength - 1].value = "";

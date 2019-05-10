@@ -138,7 +138,7 @@
 
             var label1 = document.createElement("label");
             label1.for = "item-row-what";
-            label1.innerHTML = "Full path in pc/blank for pause: ";
+            label1.innerHTML = "Full path in Computer/blank for pause: ";
             var label2 = document.createElement("label");
             label2.for = "item-row-times";
             label2.innerHTML = "Times to repeat: ";

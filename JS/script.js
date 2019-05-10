@@ -21,6 +21,20 @@
         var addNewItemButton = document.getElementById("add-new-item");
 
         var timeOutputP = document.getElementById("time-output-p");
+        
+        var localStorageItems; 
+        setLocalStorageItems();
+        console.log(localStorageItems);
+            
+        function setLocalStorageItems() {
+//            if (localStorage.getItem('items') === undefined) {
+//                localStorage.setItem('items', Json.stringify([]));
+//            }
+            localStorageItems = JSON.parse(localStorage.getItem('items'));
+            if (!Array.isArray(localStorageItems)) {
+                localStorageItems = [];
+            }
+        }
 
 
         setNewItemInputs();
@@ -32,7 +46,7 @@
 
         addNewItemButton.addEventListener("click", function () {
             var newItemRowsValues = [];
-            for (var i = 0; i < newItemRowDivs.length; i++) {
+            for (var i = 0; i < newItemRowDivs.length - 1; i++) {
                 newItemRowsValues[i] = {
                     valuesItemRowWhat: inputsItemRowWhat[i].value,
                     valuesItemRowTimes: inputsItemRowTimes[i].value,
@@ -41,7 +55,8 @@
                     clearedValuesTimeSec: clearedValuesTimeSec[i]
                 };
             }
-            console.log(newItemRowsValues);
+            localStorageItems[localStorageItems.length] = newItemRowsValues;
+            localStorage.setItem('items', JSON.stringify(localStorageItems));
         });
 
         var action = setInterval(function () {

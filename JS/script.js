@@ -252,6 +252,8 @@
         //items
         var itemsDiv = document.getElementById("items");
         var itemsTableDiv = document.getElementById("items-table");
+        var alarmNamesAndTimesStorage = [];
+        
         var tr = document.createElement("tr");
         var th = document.createElement("th");
         th.innerHTML = "Items";
@@ -259,6 +261,9 @@
         
         itemsTableDiv.appendChild(tr);
         tr.appendChild(th);
+        
+        setAlarmNamesAndTimes();
+        console.log(alarmNamesAndTimesStorage);
         
         localStorageItems.map(i => {
             tr = document.createElement("tr");
@@ -269,10 +274,63 @@
             td.innerHTML = i[0].itemName;
         });
         
+        function setAlarmNamesAndTimes() {
+            alarmNamesAndTimesStorage = localStorage.getItem("alarmNamesAndTimes");
+            
+            if (!Array.isArray(alarmNamesAndTimesStorage)) {
+                alarmNamesAndTimesStorage = [];
+            }
+        }
+        
+        document.getElementById("alarm-names-and-times").addEventListener("click", function() {
+           alarmNamesAndTimesStorage[alarmNamesAndTimesStorage.length] = {alarmName: document.getElementsByClassName("alarm-name")[0].value, alarmTime: document.getElementsByClassName("when-alarm")[0].value};
+            localStorage.setItem('alarmNamesAndTimes', JSON.stringify(alarmNamesAndTimesStorage));
+            console.log(alarmNamesAndTimesStorage); 
+        });
         
         
         
         
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        //audios
+        var audioTagsDiv = document.getElementById("audio-tags");
         
         
         

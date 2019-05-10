@@ -3,20 +3,23 @@
         var createItemDiv = document.getElementById("create-item");
         var newItemRowDivs = document.getElementsByClassName("item-row");
 
+        //save from these lines to local storage START
+        var newItemNameInput = document.getElementById("new-item-name");
+        
         var inputsItemRowWhat = [];
         var inputsItemRowTimes = [];
         var inputsItemRowTimeSec = [];
 
+        var clearedValuesTimes = [];
+        var clearedValuesTimeSec = [];
+        //save from these lines to local storage END
+        
         var labelsItemRowWhat = [];
         var labelsItemRowTimes = [];
         var labelsItemRowTimeSec = [];
 
-        var clearedValuesTimes = [];
-        var clearedValuesTimeSec = [];
-
         var addNewItemButton = document.getElementById("add-new-item");
 
-        var newItemNameInput = document.getElementById("new-item-name");
 
         var timeOutputP = document.getElementById("time-output-p");
 

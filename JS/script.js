@@ -10,7 +10,7 @@
         var labelsItemRowWhat = [];
         var labelsItemRowTimes = [];
         var labelsItemRowTimeSec = [];
-        
+
         var clearedValuesTimes = [];
         var clearedValuesTimeSec = [];
 
@@ -18,16 +18,30 @@
 
         var newItemNameInput = document.getElementById("new-item-name");
 
+        var timeOutputP = document.getElementById("time-output-p");
+
 
         setNewItemInputs();
         setNewItemLabels();
 
         addActionsToLastRow(1);
-        
+
         disableEnableAllRowInputs(true);
-        
-        console.log(localStorage.getItem('item'));
-        addNewItemButton.addEventListener("click", function() {
+
+        var action = setInterval(function () {
+            var dateNewObject = new Date();
+                timeOutputP.innerHTML = dateNewObject.getFullYear() + "-"
+                    + getTwoNumbers(dateNewObject.getMonth()) + "-" + getTwoNumbers(dateNewObject.getDay()) + " " + getTwoNumbers(dateNewObject.getHours()) + ":" + getTwoNumbers(dateNewObject.getMinutes()) + ":" + getTwoNumbers(dateNewObject.getSeconds());
+            }, 1000);
+
+        function getTwoNumbers(num) {
+            if (("" + num).length > 1) {
+                return num;
+            }
+            return "0" + num;
+        }
+
+        addNewItemButton.addEventListener("click", function () {
             localStorage.setItem('item', createItemDiv);
         });
 
@@ -106,9 +120,10 @@
             }
         }
 
+
         function isNewItemNewRowNeeded(rowLength) {
-            return (inputsItemRowWhat[rowLength - 1].value !== "" && (inputsItemRowTimes[rowLength - 1].value !== "" || inputsItemRowTimeSec[rowLength - 1].value !== ""))
-            || (inputsItemRowTimeSec[rowLength - 1].value !== "");
+            return (inputsItemRowWhat[rowLength - 1].value !== "" && (inputsItemRowTimes[rowLength - 1].value !== "" || inputsItemRowTimeSec[rowLength - 1].value !== "")) ||
+                (inputsItemRowTimeSec[rowLength - 1].value !== "");
         }
 
         function getNewItemRowCount() {

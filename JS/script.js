@@ -29,6 +29,11 @@
         addActionsToLastRow(1);
 
         disableEnableAllRowInputs(true);
+        
+        addNewItemButton.addEventListener("click", function() {
+            var newItemLocalStorageInformation = {whatValues: inputsItemRowWhat.map(function(i) {return i.value;}), inputsItemRowTimes: inputsItemRowTimes, inputsItemRowTimeSec: inputsItemRowTimeSec, clearedValuesTimes: clearedValuesTimes, clearedValuesTimeSec: clearedValuesTimeSec};
+            console.log(newItemLocalStorageInformation);
+        });
 
         var action = setInterval(function () {
             var dateNewObject = new Date();

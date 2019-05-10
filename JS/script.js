@@ -35,6 +35,7 @@
             }, 1000);
 
         function getTwoNumbers(num) {
+            //function to get from 23 to 23, but from 0 to 00, from 7 to 07... Used for showing time with 2 numbers not 1
             if (("" + num).length > 1) {
                 return num;
             }

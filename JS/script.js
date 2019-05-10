@@ -252,18 +252,31 @@
         //items
         var itemsDiv = document.getElementById("items");
         var itemsTableDiv = document.getElementById("items-table");
+        var tr = document.createElement("tr");
+        var th = document.createElement("th");
+        th.innerHTML = "Items";
+        var td;
+        
+        itemsTableDiv.appendChild(tr);
+        tr.appendChild(th);
         
         localStorageItems.map(i => {
-            var tr = document.createElement("tr");
-            var td = document.createElement("td");
+            tr = document.createElement("tr");
+            td = document.createElement("td");
             
             itemsTableDiv.appendChild(tr);
             tr.appendChild(td);
             td.innerHTML = i[0].itemName;
         });
-    }
-                              
-                              
-                              
-                              
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    }                                                   
 )();

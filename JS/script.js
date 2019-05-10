@@ -29,10 +29,19 @@
         addActionsToLastRow(1);
 
         disableEnableAllRowInputs(true);
-        
-        addNewItemButton.addEventListener("click", function() {
-            var newItemLocalStorageInformation = {whatValues: inputsItemRowWhat.map(function(i) {return i.value;}), inputsItemRowTimes: inputsItemRowTimes, inputsItemRowTimeSec: inputsItemRowTimeSec, clearedValuesTimes: clearedValuesTimes, clearedValuesTimeSec: clearedValuesTimeSec};
-            console.log(newItemLocalStorageInformation);
+
+        addNewItemButton.addEventListener("click", function () {
+            var newItemRowsValues = [];
+            for (var i = 0; i < newItemRowDivs.length; i++) {
+                newItemRowsValues[i] = {
+                    valuesItemRowWhat: inputsItemRowWhat[i].value,
+                    valuesItemRowTimes: inputsItemRowTimes[i].value,
+                    valuesItemRowTimeSec: inputsItemRowTimeSec[i].value,
+                    clearedValuesTimes: clearedValuesTimes[i],
+                    clearedValuesTimeSec: clearedValuesTimeSec[i]
+                };
+            }
+            console.log(newItemRowsValues);
         });
 
         var action = setInterval(function () {

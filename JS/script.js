@@ -79,7 +79,7 @@
 
                 var label1 = document.createElement("label");
                 label1.for = "item-row-what";
-                label1.innerHTML = "Full path in pc: ";
+                label1.innerHTML = "Full path in pc/blank for pause: ";
                 var label2 = document.createElement("label");
                 label2.for = "item-row-times";
                 label2.innerHTML = "Times to repeat: ";
@@ -107,7 +107,8 @@
         }
 
         function isNewItemNewRowNeeded(rowLength) {
-            return inputsItemRowWhat[rowLength - 1].value !== "" && (inputsItemRowTimes[rowLength - 1].value !== "" || inputsItemRowTimeSec[rowLength - 1].value !== "");
+            return (inputsItemRowWhat[rowLength - 1].value !== "" && (inputsItemRowTimes[rowLength - 1].value !== "" || inputsItemRowTimeSec[rowLength - 1].value !== ""))
+            || (inputsItemRowTimeSec[rowLength - 1].value !== "");
         }
 
         function getNewItemRowCount() {

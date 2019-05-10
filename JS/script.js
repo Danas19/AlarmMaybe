@@ -21,15 +21,19 @@
         var addNewItemButton = document.getElementById("add-new-item");
 
         var timeOutputP = document.getElementById("time-output-p");
-        
-        var localStorageItems; 
+
+        var localStorageItems;
         setLocalStorageItems();
         console.log(localStorageItems);
-            
+        
+        document.getElementById("delete-local-storage").addEventListener("click", function() {
+            localStorage.clear();
+        });
+
         function setLocalStorageItems() {
-//            if (localStorage.getItem('items') === undefined) {
-//                localStorage.setItem('items', Json.stringify([]));
-//            }
+            //            if (localStorage.getItem('items') === undefined) {
+            //                localStorage.setItem('items', Json.stringify([]));
+            //            }
             localStorageItems = JSON.parse(localStorage.getItem('items'));
             if (!Array.isArray(localStorageItems)) {
                 localStorageItems = [];
@@ -48,11 +52,11 @@
             var newItemRowsValues = [];
             for (var i = 0; i < newItemRowDivs.length - 1; i++) {
                 newItemRowsValues[i] = {
-                    valuesItemRowWhat: inputsItemRowWhat[i].value,
-                    valuesItemRowTimes: inputsItemRowTimes[i].value,
-                    valuesItemRowTimeSec: inputsItemRowTimeSec[i].value,
-                    clearedValuesTimes: clearedValuesTimes[i],
-                    clearedValuesTimeSec: clearedValuesTimeSec[i]
+                    valueItemRowWhat: inputsItemRowWhat[i].value,
+                    valueItemRowTimes: inputsItemRowTimes[i].value,
+                    valueItemRowTimeSec: inputsItemRowTimeSec[i].value,
+                    clearedValueTimes: clearedValuesTimes[i],
+                    clearedValueTimeSec: clearedValuesTimeSec[i]
                 };
             }
             localStorageItems[localStorageItems.length] = newItemRowsValues;
@@ -174,6 +178,7 @@
                 if (inputsItemRowTimes[rowLength - 1].value != "") {
                     clearedValuesTimeSec[rowLength - 1] = inputsItemRowTimeSec[rowLength - 1].value;
                     inputsItemRowTimeSec[rowLength - 1].value = "";
+                    console.log(clearedValuesTimeSec[rowLength - 1]);
                     newItemRowChange();
                 }
             });

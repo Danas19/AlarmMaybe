@@ -43,7 +43,7 @@
 
         addActionsToLastRow(1);
 
-        disableEnableAllRowInputs(true);
+        disableAllRowInputs(true, 0);
 
         addNewItemButton.addEventListener("click", function () {
             var newItemRowsValues = [];
@@ -81,17 +81,17 @@
 
         newItemNameInput.addEventListener("keyup", function () {
             if (newItemNameInput.value === "") {
-                disableEnableAllRowInputs(true);
+                disableAllRowInputs(true, 0);
             } else {
-                disableEnableAllRowInputs(false);
+                disableAllRowInputs(false, 0);
             }
         });
 
-        function disableEnableAllRowInputs(trueFalse) {
-            for (var i = 0; i < newItemRowDivs.length; i++) {
-                inputsItemRowWhat[i].disabled = trueFalse;
-                inputsItemRowTimes[i].disabled = trueFalse;
-                inputsItemRowTimeSec[i].disabled = trueFalse;
+        function disableAllRowInputs(trueIfTrue, fromIndex) {
+            for (var i = fromIndex; i < newItemRowDivs.length; i++) {
+                inputsItemRowWhat[i].disabled = trueIfTrue;
+                inputsItemRowTimes[i].disabled = trueIfTrue;
+                inputsItemRowTimeSec[i].disabled = trueIfTrue;
             }
         }
 
@@ -114,7 +114,6 @@
                 setNewItemInputs();
                 setNewItemLabels();
                 newItemRowDivs = document.getElementsByClassName("item-row");
-                console.log(newItemRowDivs);
 
                 addActionsToLastRow(getNewItemRowCount());
             }
@@ -167,26 +166,45 @@
             return inputsItemRowWhat.length;
         }
 
+        //Now in next 3 function will be used isNewItemNewRowNeeded method, but these times it should check if rowLength would be  equal to how many rows there are, if new row would appear and if not, next rows should become unchangable
         function addActionsToLastRow(rowLength) {
             inputsItemRowWhat[rowLength - 1].addEventListener("keyup", function () {
-                newItemRowChange();
+                
+                if (!isNewItemNewRowNeeded(rowLength)) {
+                    disableAllRowInputs(true, rowLength);
+                } else {
+                    disableAllRowInputs(false, rowLength);
+                    newItemRowChange(rowLength - 1);
+                }
             });
 
             inputsItemRowTimes[rowLength - 1].addEventListener("keyup", function () {
-                console.log(rowLength);
+                
                 if (inputsItemRowTimes[rowLength - 1].value != "") {
                     clearedValuesTimeSec[rowLength - 1] = inputsItemRowTimeSec[rowLength - 1].value;
                     inputsItemRowTimeSec[rowLength - 1].value = "";
-                    console.log(clearedValuesTimeSec[rowLength - 1]);
-                    newItemRowChange();
+                    newItemRowChange(rowLength - 1);
+                }
+                
+                if (!isNewItemNewRowNeeded(rowLength)) {
+                    disableAllRowInputs(true, rowLength);
+                } else {
+                    disableAllRowInputs(false, rowLength);
                 }
             });
 
             inputsItemRowTimeSec[rowLength - 1].addEventListener("keyup", function () {
+                
                 if (inputsItemRowTimeSec[rowLength - 1].value != "") {
                     clearedValuesTimes[rowLength - 1] = inputsItemRowTimes[rowLength - 1].value;
                     inputsItemRowTimes[rowLength - 1].value = "";
-                    newItemRowChange();
+                    newItemRowChange(rowLength - 1);
+                }
+                
+                if (!isNewItemNewRowNeeded(rowLength)) {
+                    disableAllRowInputs(true, rowLength);
+                } else {
+                    disableAllRowInputs(false, rowLength);
                 }
             });
 

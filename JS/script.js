@@ -46,9 +46,9 @@
         disableAllRowInputs(true, 0);
 
         addNewItemButton.addEventListener("click", function () {
-            var newItemRowsValues = [];
+            var newItemInfo = [];
             for (var i = 0; i < newItemRowDivs.length - 1; i++) {
-                newItemRowsValues[i] = {
+                newItemInfo[i] = {
                     itemName: newItemNameInput.value,
                     valueItemRowWhat: inputsItemRowWhat[i].value,
                     valueItemRowTimes: inputsItemRowTimes[i].value,
@@ -57,7 +57,7 @@
                     clearedValueTimeSec: clearedValuesTimeSec[i]
                 };
             }
-            localStorageItems[localStorageItems.length] = newItemRowsValues;
+            localStorageItems[localStorageItems.length] = newItemInfo;
             localStorage.setItem('items', JSON.stringify(localStorageItems));
         });
 
@@ -209,5 +209,61 @@
             });
 
         }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        //items
+        var itemsDiv = document.getElementById("items");
+        var itemsTableDiv = document.getElementById("items-table");
+        
+        localStorageItems.map(i => {
+            var tr = document.createElement("tr");
+            var td = document.createElement("td");
+            
+            itemsTableDiv.appendChild(tr);
+            tr.appendChild(td);
+            td.innerHTML = i[0].itemName;
+        });
     }
+                              
+                              
+                              
+                              
 )();

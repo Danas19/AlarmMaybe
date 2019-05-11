@@ -52,7 +52,7 @@
             };
             for (var i = 0; i < newItemRowDivs.length - 1; i++) {
                 newItemInfo.rows[i] = {
-                    valueItemRowWhat: inputsItemRowWhat[i].value,
+                    itemRowWhat: !isWhatInputItemName(inputsItemRowWhat[i]) ?inputsItemRowWhat[i].value : getItemWithName(inputsItemRowWhat[i].value),
                     valueItemRowTimes: inputsItemRowTimes[i].value,
                     valueItemRowTimeSec: inputsItemRowTimeSec[i].value,
                     clearedValueTimes: clearedValuesTimes[i],
@@ -178,6 +178,12 @@
                 } else {
                     disableAllRowInputs(false, rowLength);
                     newItemRowChange(rowLength - 1);
+                    if (isWhatInputItemName(inputsItemRowWhat[rowLength - 1])) {
+                        //instead of path, item's name was inputed
+                        inputsItemRowWhat[rowLength - 1].style.color = "green";
+                    } else {
+                        inputsItemRowWhat[rowLength - 1].style.color = "black";
+                    }
                 }
             });
 
@@ -212,8 +218,23 @@
             });
 
         }
-
-
+        
+        function getItemWithName(name) {
+            for (var i = 0; i < localStorageItems.length; i++) {
+                if (localStorageItems[i].itemName == name) {
+                    return localStorageItems[i];
+                }
+            }
+            return null;
+        }
+        
+        function isWhatInputItemName(whatInput) {
+            console.log(whatInput);
+            if (whatInput.value.toLowerCase().startsWith("item:")) {
+                return true;
+            }
+            return false;
+        }
 
 
 
@@ -273,15 +294,6 @@
 //
 //
 //
-//        function getItemWithName(name) {
-//            for (var i = 0; i < localStorageItems.length; i++) {
-//                console.log(name + " : " + localStorageItems[i][0].itemName);
-//                if (localStorageItems[i][0].itemName == name) {
-//                    return localStorageItems[i];
-//                }
-//            }
-//            return null;
-//        }
 
 
 //        //audios

@@ -275,7 +275,7 @@
         });
         
         function setAlarmNamesAndTimes() {
-            alarmNamesAndTimesStorage = localStorage.getItem("alarmNamesAndTimes");
+            alarmNamesAndTimesStorage = JSON.parse(localStorage.getItem('alarmNamesAndTimes'));
             
             if (!Array.isArray(alarmNamesAndTimesStorage)) {
                 alarmNamesAndTimesStorage = [];
@@ -286,6 +286,7 @@
            alarmNamesAndTimesStorage[alarmNamesAndTimesStorage.length] = {alarmName: document.getElementsByClassName("alarm-name")[0].value, alarmTime: document.getElementsByClassName("when-alarm")[0].value};
             localStorage.setItem('alarmNamesAndTimes', JSON.stringify(alarmNamesAndTimesStorage));
             console.log(alarmNamesAndTimesStorage); 
+            console.log(localStorage.getItem('alarmNamesAndTimes'));
         });
         
         

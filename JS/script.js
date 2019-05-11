@@ -25,8 +25,8 @@
         var localStorageItems;
         setLocalStorageItems();
         console.log(localStorageItems);
-        
-        document.getElementById("delete-local-storage").addEventListener("click", function() {
+
+        document.getElementById("delete-local-storage").addEventListener("click", function () {
             localStorage.clear();
         });
 
@@ -169,7 +169,7 @@
         //Now in next 3 function will be used isNewItemNewRowNeeded method, but these times it should check if rowLength would be  equal to how many rows there are, if new row would appear and if not, next rows should become unchangable
         function addActionsToLastRow(rowLength) {
             inputsItemRowWhat[rowLength - 1].addEventListener("keyup", function () {
-                
+
                 if (!isNewItemNewRowNeeded(rowLength)) {
                     disableAllRowInputs(true, rowLength);
                 } else {
@@ -179,13 +179,13 @@
             });
 
             inputsItemRowTimes[rowLength - 1].addEventListener("keyup", function () {
-                
+
                 if (inputsItemRowTimes[rowLength - 1].value != "") {
                     clearedValuesTimeSec[rowLength - 1] = inputsItemRowTimeSec[rowLength - 1].value;
                     inputsItemRowTimeSec[rowLength - 1].value = "";
                     newItemRowChange(rowLength - 1);
                 }
-                
+
                 if (!isNewItemNewRowNeeded(rowLength)) {
                     disableAllRowInputs(true, rowLength);
                 } else {
@@ -194,13 +194,13 @@
             });
 
             inputsItemRowTimeSec[rowLength - 1].addEventListener("keyup", function () {
-                
+
                 if (inputsItemRowTimeSec[rowLength - 1].value != "") {
                     clearedValuesTimes[rowLength - 1] = inputsItemRowTimes[rowLength - 1].value;
                     inputsItemRowTimes[rowLength - 1].value = "";
                     newItemRowChange(rowLength - 1);
                 }
-                
+
                 if (!isNewItemNewRowNeeded(rowLength)) {
                     disableAllRowInputs(true, rowLength);
                 } else {
@@ -209,133 +209,101 @@
             });
 
         }
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+
+
+
+
+
+
+
+
+
         //items
         var itemsDiv = document.getElementById("items");
         var itemsTableDiv = document.getElementById("items-table");
         var alarmNamesAndTimesStorage = [];
-        
+
         var tr = document.createElement("tr");
         var th = document.createElement("th");
         th.innerHTML = "Items";
         var td;
-        
+
         itemsTableDiv.appendChild(tr);
         tr.appendChild(th);
-        
+
         setAlarmNamesAndTimes();
         console.log(alarmNamesAndTimesStorage);
-        
+
         localStorageItems.map(i => {
             tr = document.createElement("tr");
             td = document.createElement("td");
-            
+
             itemsTableDiv.appendChild(tr);
             tr.appendChild(td);
             td.innerHTML = i[0].itemName;
         });
-        
+
         function setAlarmNamesAndTimes() {
             alarmNamesAndTimesStorage = JSON.parse(localStorage.getItem('alarmNamesAndTimes'));
-            
+
             if (!Array.isArray(alarmNamesAndTimesStorage)) {
                 alarmNamesAndTimesStorage = [];
             }
         }
-        
-        document.getElementById("alarm-names-and-times").addEventListener("click", function() {
-           alarmNamesAndTimesStorage[alarmNamesAndTimesStorage.length] = {alarmName: document.getElementsByClassName("alarm-name")[0].value, alarmTime: document.getElementsByClassName("when-alarm")[0].value};
+
+        document.getElementById("alarm-names-and-times").addEventListener("click", function () {
+            alarmNamesAndTimesStorage[alarmNamesAndTimesStorage.length] = {
+                alarmName: document.getElementsByClassName("alarm-name")[0].value,
+                alarmTime: document.getElementsByClassName("when-alarm")[0].value
+            };
             localStorage.setItem('alarmNamesAndTimes', JSON.stringify(alarmNamesAndTimesStorage));
-            console.log(alarmNamesAndTimesStorage); 
+            console.log(alarmNamesAndTimesStorage);
             console.log(localStorage.getItem('alarmNamesAndTimes'));
         });
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+
+
+
+
+
+
+
+
+
+        function getItemWithName(name) {
+            for (var i = 0; i < localStorageItems.length; i++) {
+                console.log(name + " : " + localStorageItems[i][0].itemName);
+                if (localStorageItems[i][0].itemName == name) {
+                    return localStorageItems[i];
+                }
+            }
+            return null;
+        }
+
+
         //audios
         var audioTagsDiv = document.getElementById("audio-tags");
-        
-        
-        
-        
-        
-    }                                                   
+
+        alarmNamesAndTimesStorage.map(i => {
+            var item = getItemWithName(i.alarmName);
+
+            if (item == null) {
+                alert("ERROR");
+                console.log("error");
+            } else {
+                var audioTag = document.createElement("audio");
+                audioTag.src = item[0].valueItemRowWhat;
+                audioTag.controls = true;
+                audioTag.loop = true;
+                var p = document.createElement("p");
+                p.innerHTML = "Your browser doesn't support HTML5 audio.";
+                audioTagsDiv.appendChild(audioTag);
+                audioTag.appendChild(p);
+            }
+
+        });
+
+
+
+
+    }
 )();

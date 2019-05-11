@@ -46,10 +46,12 @@
         disableAllRowInputs(true, 0);
 
         addNewItemButton.addEventListener("click", function () {
-            var newItemInfo = [];
+            var newItemInfo = {
+                itemName: newItemNameInput.value,
+                rows: []
+            };
             for (var i = 0; i < newItemRowDivs.length - 1; i++) {
-                newItemInfo[i] = {
-                    itemName: newItemNameInput.value,
+                newItemInfo.rows[i] = {
                     valueItemRowWhat: inputsItemRowWhat[i].value,
                     valueItemRowTimes: inputsItemRowTimes[i].value,
                     valueItemRowTimeSec: inputsItemRowTimeSec[i].value,
@@ -58,6 +60,7 @@
                 };
             }
             localStorageItems[localStorageItems.length] = newItemInfo;
+            console.log(newItemInfo);
             localStorage.setItem('items', JSON.stringify(localStorageItems));
         });
 
@@ -218,11 +221,12 @@
 
 
 
-//        //items
-//        var itemsDiv = document.getElementById("items");
-//        var itemsTableDiv = document.getElementById("items-table");
-//        var alarmNamesAndTimesStorage = [];
-//
+        //items
+        var itemsDiv = document.getElementById("items");
+        var itemsTableDiv = document.getElementById("items-table");
+        var alarmStorage = [];
+        var alarmsDiv = document.getElementById("alarms-div");
+
 //        var tr = document.createElement("tr");
 //        var th = document.createElement("th");
 //        th.innerHTML = "Items";

@@ -182,7 +182,25 @@
             });
 
             inputsItemRowTimes[rowLength - 1].addEventListener("keyup", function () {
+                onChangeInputTimes(rowLength);
+            });
+            
+            inputsItemRowTimes[rowLength - 1].addEventListener("mouseup", function() {
+                onChangeInputTimes(rowLength);
+            });
+            
 
+            inputsItemRowTimeSec[rowLength - 1].addEventListener("keyup", function () {
+                onChangeInputTimeSec(rowLength);
+            });
+            
+            inputsItemRowTimeSec[rowLength - 1].addEventListener("mouseup", function () {
+                onChangeInputTimeSec(rowLength);
+            });
+
+        }
+        
+        function onChangeInputTimes(rowLength) {
                 if (inputsItemRowTimes[rowLength - 1].value != "") {
                     clearedValuesTimeSec[rowLength - 1] = inputsItemRowTimeSec[rowLength - 1].value;
                     inputsItemRowTimeSec[rowLength - 1].value = "";
@@ -194,11 +212,10 @@
                 } else {
                     disableAllRowInputs(false, rowLength);
                 }
-            });
-
-            inputsItemRowTimeSec[rowLength - 1].addEventListener("keyup", function () {
-
-                if (inputsItemRowTimeSec[rowLength - 1].value != "") {
+            }
+        
+        function onChangeInputTimeSec(rowLength) {
+            if (inputsItemRowTimeSec[rowLength - 1].value != "") {
                     clearedValuesTimes[rowLength - 1] = inputsItemRowTimes[rowLength - 1].value;
                     inputsItemRowTimes[rowLength - 1].value = "";
                     newItemRowChange(rowLength - 1);
@@ -209,8 +226,6 @@
                 } else {
                     disableAllRowInputs(false, rowLength);
                 }
-            });
-
         }
         
         function getItemWithName(name) {

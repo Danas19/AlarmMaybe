@@ -23,3 +23,19 @@ th {
     color: green;
     font-size: 2em;
 }
+
+input::placeholder {
+    color: red;
+}
+
+* {
+    font-family: monospace;
+}
+
+.item-row input:first-child {
+    width: 22em;
+}
+
+.item-row input:first-child +*::after {
+    content: "/";
+}

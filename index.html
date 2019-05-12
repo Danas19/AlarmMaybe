@@ -15,14 +15,9 @@
             <input type="text" id="new-item-name">
         </div>
         <div class="item-row">
-            <label for="item-row-what">Full path in Computer/blank for pause: </label>
-            <input type="text" class="item-row-what">
-
-            <label for="item-row-times">Times to repeat: </label>
-            <input type="number" min="0" pattern="[0-9]{1,}" class="item-row-times">
-
-            <label for="item-row-time-sec">Time to play(s): </label>
-            <input type="number" min="0" class="item-row-time-sec">
+            <input type="text" class="item-row-what" placeholder="Full path in Computer/blank for pause">
+            <input type="number" min="0" pattern="[0-9]{1,}" class="item-row-times" placeholder="Times to repeat">
+            <input type="number" min="0" class="item-row-time-sec" placeholder="Time to play(s)">
         </div>
         <button id="add-new-item">Add item</button>
     </div>

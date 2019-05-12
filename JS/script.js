@@ -52,7 +52,7 @@
             };
             for (var i = 0; i < newItemRowDivs.length - 1; i++) {
                 newItemInfo.rows[i] = {
-                    itemRowWhat: !isWhatInputItemName(inputsItemRowWhat[i]) ?inputsItemRowWhat[i].value : getItemWithName(inputsItemRowWhat[i].value),
+                    itemRowWhat: inputsItemRowWhat[i].value,
                     valueItemRowTimes: inputsItemRowTimes[i].value,
                     valueItemRowTimeSec: inputsItemRowTimeSec[i].value,
                     clearedValueTimes: clearedValuesTimes[i],
@@ -178,12 +178,6 @@
                 } else {
                     disableAllRowInputs(false, rowLength);
                     newItemRowChange(rowLength - 1);
-                    if (isWhatInputItemName(inputsItemRowWhat[rowLength - 1])) {
-                        //instead of path, item's name was inputed
-                        inputsItemRowWhat[rowLength - 1].style.color = "green";
-                    } else {
-                        inputsItemRowWhat[rowLength - 1].style.color = "black";
-                    }
                 }
             });
 
@@ -226,14 +220,6 @@
                 }
             }
             return null;
-        }
-        
-        function isWhatInputItemName(whatInput) {
-            console.log(whatInput);
-            if (whatInput.value.toLowerCase().startsWith("item:")) {
-                return true;
-            }
-            return false;
         }
 
 

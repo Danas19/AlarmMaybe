@@ -298,30 +298,53 @@
 
 
         setAlarmStorage();
+        console.log(alarmStorage);
         mapAlarmStorage(alarmStorage);
-        
+
         function addNewAlarmRow() {
             var newAlarmRowDiv = document.createElement("div");
             newAlarmRowDiv.classList.add("alarm-names-and-times-rows");
             alarmsDiv.appendChild(newAlarmRowDiv);
             alarmRowsDivs[alarmRowsDivs.length] = newAlarmRowDiv;
         }
-        
+
         function addBrToLastRow() {
             var newBr = document.createElement("br");
             alarmRowsDivs[alarmRowsDivs.length - 1].appendChild(newBr);
             alarmsDiv.appendChild(alarmRowsDivs[alarmRowsDivs.length - 1]);
         }
 
-        function addNewSaveAlarmButton(innnerHtml) {
+        function addNewSaveAlarmButton(innerHtml) {
             var alarmSaveButton = document.createElement("button");
             alarmSaveButton.type = "button";
             alarmSaveButton.classList.add("btn");
             alarmSaveButton.classList.add("btn-success");
             alarmSaveButton.classList.add("save-alarm-button");
-            alarmSaveButton.innerHTML = innnerHtml;
+            alarmSaveButton.innerHTML = innerHtml;
             alarmRowsDivs[alarmRowsDivs.length - 1].appendChild(alarmSaveButton);
-            saveAlarmButtons[saveAlarmButtons.length] = alarmSaveButton;
+
+
+            if (innerHtml.toLowerCase() !== "save all") {
+                saveAlarmButtons[saveAlarmButtons.length] = alarmSaveButton;
+                addActionToSaveAlarmButton(saveAlarmButtons.length - 1);
+            } else {
+                addActionToSaveAllAlarms(alarmSaveButton);
+            }
+
+        }
+
+        function addActionToSaveAllAlarms(button) {
+            button.addEventListener("click", function () {
+                for (var i = 0; i < saveAlarmButtons.length; i++) {
+                    if (getItemWithName(alarmNameInputs[index].value) == null) {
+                        break;
+                    }
+
+                    if (i === saveAlarmButtons.length - 1) {
+                        localStorage.setItem('alarm-storage', JSON.stringify(alarmStorage));
+                    }
+                }
+            });
         }
 
         function addNewAlarmNameInput(value) {
@@ -342,7 +365,7 @@
             alarmTimeInputs[alarmTimeInputs.length] = newAlarmTimeInput;
         }
 
-        
+
 
         function setAlarmStorage() {
             alarmStorage = JSON.parse(localStorage.getItem('alarm-storage'));
@@ -365,9 +388,48 @@
             addNewAlarmNameInput("");
             addNewAlarmTimeInput("");
             addNewSaveAlarmButton("Save");
-            
+
+
+
             addBrToLastRow();
             addNewSaveAlarmButton("Save all");
+        }
+
+        function addActionToAllSaveButtons() {
+            for (var i = 0; i < addNewSaveAlarmButton.length; i++) {
+                addActionToSaveAlarmButton(i);
+            }
+        }
+
+        function addActionToSaveAlarmButton(index) {
+            console.log("index: " + index);
+            saveAlarmButtons[index].addEventListener("click", function () {
+                if (getItemWithName(alarmNameInputs[index].value) != null) {
+                    var localStorageOld = JSON.parse(localStorage.getItem('alarm-storage'));
+                    if (!Array.isArray(localStorageOld)) {
+                        localStorageOld = [];
+                    }
+                    
+                    var wasAlreadyItemName = false;
+                    for (var i = 0; i < localStorageOld.length; i++) {
+                        if (localStorageOld[i].alarmName === alarmNameInputs[index].value) {
+                            localStorageOld[i].alarmName = alarmNameInputs[index].value;
+                            localStorageOld[i].alarmTime = alarmTimeInputs[i].value;
+                            wasAlreadyItemName = true;
+                            localStorage.setItem('alarm-storage', JSON.stringify(localStorageOld));
+                            break;
+                        }
+                    }
+                    
+                    if (!wasAlreadyItemName) {
+                        localStorageOld.push(alarmNameInputs[index].value);
+                        localStorage.setItem('alarm-storage', JSON.stringify(localStorageOld));
+                    }
+                    
+                } else {
+                    alert("Error, no item with name: " + alarmNameInputs[index].value);
+                }
+            });
         }
 
 

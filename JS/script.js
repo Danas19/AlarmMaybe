@@ -175,14 +175,21 @@
 
 
         function isNewItemNewRowNeeded(rowLength) {
-            console.log("get item with specific name: " + getItemWithName(inputsItemRowItemName[rowLength - 1].value));
-            
             return (inputsItemRowWhat[rowLength - 1].value !== "" || getItemWithName(inputsItemRowItemName[rowLength - 1].value) != null) && (inputsItemRowTimes[rowLength - 1].value !== "") ||
                 ((inputsItemRowTimeSec[rowLength - 1].value !== "" && inputsItemRowItemName[rowLength - 1].value === "") || (inputsItemRowTimeSec[rowLength - 1].value !== "" && getItemWithName(inputsItemRowItemName[rowLength - 1].value) !== null));
         }
 
         function getNewItemRowCount() {
             return inputsItemRowWhat.length;
+        }
+        
+        function  disableNewItemButtonIfNeeded() {
+            console.log(inputsItemRowWhat[inputsItemRowWhat.length - 1].disabled === true);
+            if (inputsItemRowWhat[inputsItemRowWhat.length - 1].disabled === true) {
+                addNewItemButton.style.display = "none";
+            } else {
+                addNewItemButton.style.display = "block";
+            }
         }
 
         //Now in next 3 function will be used isNewItemNewRowNeeded method, but these times it should check if rowLength would be  equal to how many rows there are, if new row would appear and if not, next rows should become unchangable
@@ -196,6 +203,7 @@
                     disableAllRowInputs(false, rowLength);
                     newItemRowChange(rowLength - 1);
                 }
+                disableNewItemButtonIfNeeded();
             });
             
             inputsItemRowItemName[rowLength - 1].addEventListener("keyup", function() {
@@ -207,6 +215,7 @@
                     disableAllRowInputs(false, rowLength);
                     newItemRowChange(rowLength - 1);
                 }
+                disableNewItemButtonIfNeeded();
             });
 
             inputsItemRowTimes[rowLength - 1].addEventListener("keyup", function () {
@@ -240,6 +249,7 @@
                 } else {
                     disableAllRowInputs(false, rowLength);
                 }
+            disableNewItemButtonIfNeeded();
             }
         
         function onChangeInputTimeSec(rowLength) {
@@ -254,6 +264,7 @@
                 } else {
                     disableAllRowInputs(false, rowLength);
                 }
+            disableNewItemButtonIfNeeded();
         }
         
         function getItemWithName(name) {

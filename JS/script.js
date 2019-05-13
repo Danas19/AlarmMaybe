@@ -336,7 +336,7 @@
         function addActionToSaveAllAlarms(button) {
             button.addEventListener("click", function () {
                 for (var i = 0; i < saveAlarmButtons.length; i++) {
-                    if (getItemWithName(alarmNameInputs[index].value) == null) {
+                    if (getItemWithName(alarmNameInputs[index].value) === null) {
                         break;
                     }
 
@@ -409,23 +409,14 @@
                     if (!Array.isArray(localStorageOld)) {
                         localStorageOld = [];
                     }
-                    
-                    var wasAlreadyItemName = false;
-                    for (var i = 0; i < localStorageOld.length; i++) {
-                        if (localStorageOld[i].alarmName === alarmNameInputs[index].value) {
-                            localStorageOld[i].alarmName = alarmNameInputs[index].value;
-                            localStorageOld[i].alarmTime = alarmTimeInputs[i].value;
-                            wasAlreadyItemName = true;
-                            localStorage.setItem('alarm-storage', JSON.stringify(localStorageOld));
-                            break;
-                        }
-                    }
-                    
-                    if (!wasAlreadyItemName) {
-                        localStorageOld.push(alarmNameInputs[index].value);
-                        localStorage.setItem('alarm-storage', JSON.stringify(localStorageOld));
-                    }
-                    
+
+                    localStorageOld[index] = {
+                        alarmName: alarmNameInputs[index].value,
+                        alarmTime: alarmTimeInputs[index].value,
+                        startedCheckingTime: ""
+                    };
+                    localStorage.setItem('alarm-storage', JSON.stringify(localStorageOld));
+
                 } else {
                     alert("Error, no item with name: " + alarmNameInputs[index].value);
                 }

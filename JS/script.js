@@ -184,7 +184,6 @@
         }
         
         function  disableNewItemButtonIfNeeded() {
-            console.log(inputsItemRowWhat[inputsItemRowWhat.length - 1].disabled === true);
             if (inputsItemRowWhat[inputsItemRowWhat.length - 1].disabled === true) {
                 addNewItemButton.style.display = "none";
             } else {

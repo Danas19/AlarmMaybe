@@ -46,6 +46,7 @@
         addActionsToLastRow(1);
 
         disableAllRowInputs(true, 0);
+        disableNewItemButtonIfNeeded();
 
         addNewItemButton.addEventListener("click", function () {
             var newItemInfo = {
@@ -188,7 +189,7 @@
         }
 
         function disableNewItemButtonIfNeeded() {
-            if (inputsItemRowWhat[inputsItemRowWhat.length - 1].disabled === true) {
+            if (inputsItemRowWhat[inputsItemRowWhat.length - 1].disabled === true || newItemNameInput.value === "" || getItemWithName(newItemNameInput.value) === null) {
                 addNewItemButton.style.display = "none";
             } else {
                 addNewItemButton.style.display = "block";

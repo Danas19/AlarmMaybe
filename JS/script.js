@@ -304,7 +304,7 @@
             var newAlarmRowDiv = document.createElement("div");
             newAlarmRowDiv.classList.add("alarm-names-and-times-rows");
             alarmsDiv.appendChild(newAlarmRowDiv);
-            var alarmRowsDivs[alarmRowDivs.length] = newAlarmRowDiv;
+            alarmRowsDivs[alarmRowsDivs.length] = newAlarmRowDiv;
         }
 
         function addNewSaveAlarmButton(innnerHtml) {
@@ -314,7 +314,7 @@
             alarmSaveButton.classList.add("btn-success");
             alarmSaveButton.classList.add("save-alarm-button");
             alarmSaveButton.innerHTML = innnerHtml;
-            alarmRowsDivs[alarmRowDivs.length - 1].appendChild(alarmSaveButton);
+            alarmRowsDivs[alarmRowsDivs.length - 1].appendChild(alarmSaveButton);
             saveAlarmButtons[saveAlarmButtons.length] = alarmSaveButton;
         }
 
@@ -323,7 +323,7 @@
             newAlarmNameInput.type = "text";
             newAlarmNameInput.classList.add("alarm-name-inputs");
             newAlarmNameInput.value = value;
-            alarmRowsDivs[alarmRowDivs.length - 1].appendChild(newAlarmNameInput);
+            alarmRowsDivs[alarmRowsDivs.length - 1].appendChild(newAlarmNameInput);
             alarmNameInputs[alarmNameInputs.length] = newAlarmNameInput;
         }
 
@@ -332,7 +332,7 @@
             newAlarmTimeInput.type = "text";
             newAlarmTimeInput.classList.add("alarm-time-inputs");
             newAlarmTimeInput.value = value;
-            alarmRowsDivs[alarmRowDivs.length - 1].appendChild(newAlarmTimeInput);
+            alarmRowsDivs[alarmRowsDivs.length - 1].appendChild(newAlarmTimeInput);
             alarmTimeInputs[alarmTimeInputs.length] = newAlarmTimeInput;
         }
 

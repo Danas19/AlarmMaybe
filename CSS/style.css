@@ -32,7 +32,7 @@ input::placeholder {
     font-family: monospace;
 }
 
-.item-row input:first-child {
+.item-row label:first-child + input {
     width: 22em;
 }
 

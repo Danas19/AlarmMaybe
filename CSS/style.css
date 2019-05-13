@@ -14,6 +14,7 @@ input::placeholder {
 
 * {
     font-family: monospace;
+    font-size: 1.1em;
 }
 
 .item-row label:first-child + input {
@@ -24,4 +25,12 @@ input::placeholder {
     margin: 3em;
     padding: 1em;
     border: 2px solid green;
+}
+
+#create-item:hover + #set-times-for-alarms {
+    opacity: 0.5;
+}
+
+span {
+    font-size: 0.7em;
 }

@@ -93,7 +93,7 @@
             }
             disableNewItemButtonIfNeeded();
         });
-        
+
         function changeButtonStyle(button) {
             button.classList.add("btn");
             button.classList.add("btn-success");
@@ -375,18 +375,33 @@
             }
         }
 
+        function addAlarmSpan(innerHtml) {
+            var span = document.createElement("span");
+            span.innerHTML = innerHtml;
+            alarmRowsDivs[alarmRowsDivs.length - 1].appendChild(span);
+        }
+
         function mapAlarmStorage(alarmStorage) {
             for (var i = 0; i < alarmStorage.length; i++) {
                 addNewAlarmRow();
+                addAlarmLabel("alarm name: ");
                 addNewAlarmNameInput(alarmStorage[i].alarmName);
+                addAlarmLabel("alarm time ");
+                addAlarmSpan("(hours:minutes, for ex. 12:57): ");
                 addNewAlarmTimeInput(alarmStorage[i].alarmTime);
                 addNewSaveAlarmButton("Save");
-                alarmStorage[i].startedCheckingTime = new Date();
+                
+                alarmStorage[i].startedCheckingDate = new Date();
+                setAlarmStorageTimeLeft(i);
+
                 console.log(alarmStorage[i].startedCheckingTime);
             }
 
             addNewAlarmRow();
+            addAlarmLabel("alarm name: ");
             addNewAlarmNameInput("");
+            addAlarmLabel("alarm time ");
+            addAlarmSpan("(hours:minutes, for ex. 12:57): ");
             addNewAlarmTimeInput("");
             addNewSaveAlarmButton("Save");
 
@@ -394,6 +409,24 @@
 
             addBrToLastRow();
             addNewSaveAlarmButton("Save all");
+        }
+
+        function setAlarmStorageTimeLeft(i) {
+            timeLeft = (alarmStorage[i].alarmTime.substring(0, 3) * 60 + alarmStorage[i].alarmTime.substring(3, 5) - alarmStorage[i].startedCheckingTime.getHours() * 60 - alarmStorage[i].startedCheckingTime.getMinutes());
+
+            if (timeLeft < 0) {
+                timeLeft = 24 * 60 + timeLeft;
+            }
+
+            timeLeft *= 1000;
+            alarmStorage[i].startedCheckingTime = timeLeft;
+        }
+
+        function addAlarmLabel(innerHtml) {
+            var label = document.createElement("label");
+            label.innerHTML = innerHtml;
+            alarmRowsDivs[alarmRowsDivs.length - 1].appendChild(label);
+
         }
 
         function addActionToAllSaveButtons() {
@@ -414,7 +447,8 @@
                     localStorageOld[index] = {
                         alarmName: alarmNameInputs[index].value,
                         alarmTime: alarmTimeInputs[index].value,
-                        startedCheckingTime: ""
+                        startedCheckingTime: "",
+                        timeLeftMillis: ""
                     };
                     localStorage.setItem('alarm-storage', JSON.stringify(localStorageOld));
 
@@ -424,5 +458,12 @@
             });
         }
 
+        var doAlarmAction = setInterval(function () {
+            for (var i = 0; i <= alarmStorage.length; i++) {
+                if (alarmStorage[i].startedCheckingTime.getMilliseconds() + alarmStorage[i].timeLeftMillis >= new Date().getMilliseconds()) {
+                    alert("RUN MUSIC");
+                }
+            }
+        }, 100);
     }
 )();

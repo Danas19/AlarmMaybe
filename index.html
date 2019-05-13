@@ -9,7 +9,27 @@
 </head>
 
 <body>
+    <div class="container">
+        <!--        <input type="file" value="search audio file in pc">-->
+        <div>
+            <p id="time-output-p"></p>
+        </div>
+
+        <!--
+        <p>without loop</p>
+        <audio src="C:/Users/pc/Desktop/audios/Sleep_Away.mp3" controls>
+            <p>Your browser doesn't support HTML5 audio.</p>
+        </audio>
+
+        <p>with loop and id</p>
+        <audio src="C:/Users/pc/Desktop/audios/explosion.mp3" controls loop id="audio1">
+            <p>Your browser doesn't support HTML5 audio.</p>
+        </audio>
+-->
+        <button id="delete-local-storage">Delete local storage</button>
+    </div>
     <div id="create-item">
+        <h2>Create new alarm item</h2>
         <div>
             <label for="new-item">Name new alarm item: </label>
             <input type="text" id="new-item-name">
@@ -17,7 +37,7 @@
         <div class="item-row">
             <label for="item-row-what">Full path in Computer/blank for pause: </label>
             <input type="text" class="item-row-what" placeholder="Full path in Computer/blank for pause">
-            
+
             <label for="item-row-item-name">Alarm item name: </label>
             <input type="text" class="item-row-item-name" placeholder="item name">
 
@@ -31,7 +51,8 @@
     </div>
 
     <div id="set-times-for-alarms">
-<!--
+        <h2>Set times for alarms</h2>
+        <!--
         <div id="alarm-names-and-times-rows">
             <input class="alarm-name" type="text" placeholder="Alarm name(created before)">
             <input  class="when-alarm" type="text" placeholder="When (hours:minutes, for example 15:12)">
@@ -40,28 +61,10 @@
         <button id="alarm-names-and-times-button" type="button" class="btn btn-success">Save All</button>
 -->
     </div>
-    <div class="container">
-<!--        <input type="file" value="search audio file in pc">-->
-        <div>
-            <p id="time-output-p"></p>
-        </div>
 
-<!--
-        <p>without loop</p>
-        <audio src="C:/Users/pc/Desktop/audios/Sleep_Away.mp3" controls>
-            <p>Your browser doesn't support HTML5 audio.</p>
-        </audio>
 
-        <p>with loop and id</p>
-        <audio src="C:/Users/pc/Desktop/audios/explosion.mp3" controls loop id="audio1">
-            <p>Your browser doesn't support HTML5 audio.</p>
-        </audio>
--->
-        <button id="delete-local-storage">Delete what was saved</button>
-    </div>
-    
     <div id="audio-tags">
-        
+
     </div>
     <script src="JS/script.js"></script>
 </body>

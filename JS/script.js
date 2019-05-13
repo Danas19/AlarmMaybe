@@ -90,7 +90,7 @@
         });
 
         newItemNameInput.addEventListener("keyup", function () {
-            if (newItemNameInput.value === "") {
+            if (newItemNameInput.value === "" || getItemWithName(newItemNameInput.value) != null) {
                 disableAllRowInputs(true, 0);
             } else {
                 disableAllRowInputs(false, 0);

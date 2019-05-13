@@ -306,6 +306,12 @@
             alarmsDiv.appendChild(newAlarmRowDiv);
             alarmRowsDivs[alarmRowsDivs.length] = newAlarmRowDiv;
         }
+        
+        function addBrToLastRow() {
+            var newBr = document.createElement("br");
+            alarmRowsDivs[alarmRowsDivs.length - 1].appendChild(newBr);
+            alarmsDiv.appendChild(alarmRowsDivs[alarmRowsDivs.length - 1]);
+        }
 
         function addNewSaveAlarmButton(innnerHtml) {
             var alarmSaveButton = document.createElement("button");
@@ -359,6 +365,9 @@
             addNewAlarmNameInput("");
             addNewAlarmTimeInput("");
             addNewSaveAlarmButton("Save");
+            
+            addBrToLastRow();
+            addNewSaveAlarmButton("Save all");
         }
 
 

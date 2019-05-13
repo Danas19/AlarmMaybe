@@ -21,6 +21,7 @@
         var labelsItemRowTimeSec = [];
 
         var addNewItemButton = document.getElementById("add-new-item");
+        changeButtonStyle(addNewItemButton);
 
         var timeOutputP = document.getElementById("time-output-p");
 
@@ -98,6 +99,11 @@
             }
             disableNewItemButtonIfNeeded();
         });
+        
+        function changeButtonStyle(button) {
+            button.classList.add("btn");
+            button.classList.add("btn-success");
+        }
 
         function disableAllRowInputs(trueIfTrue, fromIndex) {
             for (var i = fromIndex; i < newItemRowDivs.length; i++) {
@@ -318,8 +324,7 @@
         function addNewSaveAlarmButton(innerHtml) {
             var alarmSaveButton = document.createElement("button");
             alarmSaveButton.type = "button";
-            alarmSaveButton.classList.add("btn");
-            alarmSaveButton.classList.add("btn-success");
+            changeButtonStyle(alarmSaveButton);
             alarmSaveButton.classList.add("save-alarm-button");
             alarmSaveButton.innerHTML = innerHtml;
             alarmRowsDivs[alarmRowsDivs.length - 1].appendChild(alarmSaveButton);

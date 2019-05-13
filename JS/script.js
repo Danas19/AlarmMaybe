@@ -65,6 +65,10 @@
             localStorageItems[localStorageItems.length] = newItemInfo;
             console.log(newItemInfo);
             localStorage.setItem('items', JSON.stringify(localStorageItems));
+            
+            while (createItemDiv.firstChild) {
+                createItemDiv.removeChild(createItemDiv.firstChild);
+            }
         });
 
         var action = setInterval(function () {

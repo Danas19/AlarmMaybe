@@ -96,6 +96,7 @@
             } else {
                 disableAllRowInputs(false, 0);
             }
+            disableNewItemButtonIfNeeded();
         });
 
         function disableAllRowInputs(trueIfTrue, fromIndex) {
@@ -189,7 +190,7 @@
         }
 
         function disableNewItemButtonIfNeeded() {
-            if (inputsItemRowWhat[inputsItemRowWhat.length - 1].disabled === true || newItemNameInput.value === "" || getItemWithName(newItemNameInput.value) === null) {
+            if (inputsItemRowWhat[inputsItemRowWhat.length - 1].disabled === true || newItemNameInput.value === "" || getItemWithName(newItemNameInput.value) !== null || inputsItemRowItemName.length === 1) {
                 addNewItemButton.style.display = "none";
             } else {
                 addNewItemButton.style.display = "block";
@@ -207,7 +208,6 @@
                     disableAllRowInputs(false, rowLength);
                     newItemRowChange(rowLength - 1);
                 }
-                disableNewItemButtonIfNeeded();
             });
 
             inputsItemRowItemName[rowLength - 1].addEventListener("keyup", function () {

@@ -15,11 +15,6 @@
         var clearedValuesTimeSec = [];
         //save from these lines to local storage END
 
-        var labelsItemRowWhat = [];
-        var labelsItemRowItemName = [];
-        var labelsItemRowTimes = [];
-        var labelsItemRowTimeSec = [];
-
         var addNewItemButton = document.getElementById("add-new-item");
         changeButtonStyle(addNewItemButton);
 
@@ -42,7 +37,6 @@
 
 
         setNewItemInputs();
-        setNewItemLabels();
 
         addActionsToLastRow(1);
 

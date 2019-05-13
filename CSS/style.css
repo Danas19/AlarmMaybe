@@ -8,22 +8,6 @@ body {
     font-family: monospace;
 }
 
-table, td, th {
-    border: 2px solid black;
-    font-size: 1.5em;
-    font-family: monospace;
-}
-
-tr:hover {
-    color: white;
-    background-color: black;
-}
-
-th {
-    color: green;
-    font-size: 2em;
-}
-
 input::placeholder {
     color: red;
 }
@@ -36,6 +20,8 @@ input::placeholder {
     width: 22em;
 }
 
-.item-row input:first-child +*::after {
-    content: "/";
+#create-item, #set-times-for-alarms {
+    margin: 3em;
+    padding: 1em;
+    border: 2px solid green;
 }

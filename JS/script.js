@@ -65,7 +65,7 @@
             localStorageItems[localStorageItems.length] = newItemInfo;
             console.log(newItemInfo);
             localStorage.setItem('items', JSON.stringify(localStorageItems));
-            
+
             while (createItemDiv.firstChild) {
                 createItemDiv.removeChild(createItemDiv.firstChild);
             }
@@ -186,8 +186,8 @@
         function getNewItemRowCount() {
             return inputsItemRowWhat.length;
         }
-        
-        function  disableNewItemButtonIfNeeded() {
+
+        function disableNewItemButtonIfNeeded() {
             if (inputsItemRowWhat[inputsItemRowWhat.length - 1].disabled === true) {
                 addNewItemButton.style.display = "none";
             } else {
@@ -199,7 +199,7 @@
         function addActionsToLastRow(rowLength) {
             inputsItemRowWhat[rowLength - 1].addEventListener("keyup", function () {
                 inputsItemRowItemName[rowLength - 1].value = "";
-                
+
                 if (!isNewItemNewRowNeeded(rowLength)) {
                     disableAllRowInputs(true, rowLength);
                 } else {
@@ -208,10 +208,10 @@
                 }
                 disableNewItemButtonIfNeeded();
             });
-            
-            inputsItemRowItemName[rowLength - 1].addEventListener("keyup", function() {
+
+            inputsItemRowItemName[rowLength - 1].addEventListener("keyup", function () {
                 inputsItemRowWhat[rowLength - 1].value = "";
-                
+
                 if (!isNewItemNewRowNeeded(rowLength)) {
                     disableAllRowInputs(true, rowLength);
                 } else {
@@ -224,52 +224,52 @@
             inputsItemRowTimes[rowLength - 1].addEventListener("keyup", function () {
                 onChangeInputTimes(rowLength);
             });
-            
-            inputsItemRowTimes[rowLength - 1].addEventListener("mouseup", function() {
+
+            inputsItemRowTimes[rowLength - 1].addEventListener("mouseup", function () {
                 onChangeInputTimes(rowLength);
             });
-            
+
 
             inputsItemRowTimeSec[rowLength - 1].addEventListener("keyup", function () {
                 onChangeInputTimeSec(rowLength);
             });
-            
+
             inputsItemRowTimeSec[rowLength - 1].addEventListener("mouseup", function () {
                 onChangeInputTimeSec(rowLength);
             });
 
         }
-        
+
         function onChangeInputTimes(rowLength) {
-                if (inputsItemRowTimes[rowLength - 1].value != "") {
-                    clearedValuesTimeSec[rowLength - 1] = inputsItemRowTimeSec[rowLength - 1].value;
-                    inputsItemRowTimeSec[rowLength - 1].value = "";
-                    newItemRowChange(rowLength - 1);
-                }
-
-                if (!isNewItemNewRowNeeded(rowLength)) {
-                    disableAllRowInputs(true, rowLength);
-                } else {
-                    disableAllRowInputs(false, rowLength);
-                }
-            disableNewItemButtonIfNeeded();
+            if (inputsItemRowTimes[rowLength - 1].value != "") {
+                clearedValuesTimeSec[rowLength - 1] = inputsItemRowTimeSec[rowLength - 1].value;
+                inputsItemRowTimeSec[rowLength - 1].value = "";
+                newItemRowChange(rowLength - 1);
             }
-        
-        function onChangeInputTimeSec(rowLength) {
-            if (inputsItemRowTimeSec[rowLength - 1].value != "") {
-                    clearedValuesTimes[rowLength - 1] = inputsItemRowTimes[rowLength - 1].value;
-                    inputsItemRowTimes[rowLength - 1].value = "";
-                    newItemRowChange(rowLength - 1);
-                }
 
-                if (!isNewItemNewRowNeeded(rowLength)) {
-                    disableAllRowInputs(true, rowLength);
-                } else {
-                    disableAllRowInputs(false, rowLength);
-                }
+            if (!isNewItemNewRowNeeded(rowLength)) {
+                disableAllRowInputs(true, rowLength);
+            } else {
+                disableAllRowInputs(false, rowLength);
+            }
             disableNewItemButtonIfNeeded();
         }
-        
+
+        function onChangeInputTimeSec(rowLength) {
+            if (inputsItemRowTimeSec[rowLength - 1].value != "") {
+                clearedValuesTimes[rowLength - 1] = inputsItemRowTimes[rowLength - 1].value;
+                inputsItemRowTimes[rowLength - 1].value = "";
+                newItemRowChange(rowLength - 1);
+            }
+
+            if (!isNewItemNewRowNeeded(rowLength)) {
+                disableAllRowInputs(true, rowLength);
+            } else {
+                disableAllRowInputs(false, rowLength);
+            }
+            disableNewItemButtonIfNeeded();
+        }
+
         function getItemWithName(name) {
             for (var i = 0; i < localStorageItems.length; i++) {
                 if (localStorageItems[i].itemName == name) {
@@ -285,136 +285,208 @@
 
 
 
-        //items
-        var itemsDiv = document.getElementById("items");
-        var itemsTableDiv = document.getElementById("items-table");
-        var alarmStorage = [];
-        var alarmsDiv = document.getElementById("alarms-div");
+        //alarm names and when
+        var alarmStorage;
 
-//        var tr = document.createElement("tr");
-//        var th = document.createElement("th");
-//        th.innerHTML = "Items";
-//        var td;
-//
-//        itemsTableDiv.appendChild(tr);
-//        tr.appendChild(th);
-//
-//        setAlarmNamesAndTimes();
-//        console.log(alarmNamesAndTimesStorage);
-//
-//        localStorageItems.map(i => {
-//            tr = document.createElement("tr");
-//            td = document.createElement("td");
-//
-//            itemsTableDiv.appendChild(tr);
-//            tr.appendChild(td);
-//            td.innerHTML = i[0].itemName;
-//        });
-//
-//        function setAlarmNamesAndTimes() {
-//            alarmNamesAndTimesStorage = JSON.parse(localStorage.getItem('alarmNamesAndTimes'));
-//
-//            if (!Array.isArray(alarmNamesAndTimesStorage)) {
-//                alarmNamesAndTimesStorage = [];
-//            }
-//        }
-//
-//        document.getElementById("alarm-names-and-times").addEventListener("click", function () {
-//            alarmNamesAndTimesStorage[alarmNamesAndTimesStorage.length] = {
-//                alarmName: document.getElementsByClassName("alarm-name")[0].value,
-//                alarmTime: document.getElementsByClassName("when-alarm")[0].value
-//            };
-//            localStorage.setItem('alarmNamesAndTimes', JSON.stringify(alarmNamesAndTimesStorage));
-//            console.log(alarmNamesAndTimesStorage);
-//            console.log(localStorage.getItem('alarmNamesAndTimes'));
-//        });
-//
-//
-//
-//
-//
-//
-//
-//
-//
+        var alarmsDiv = document.getElementById("set-times-for-alarms");
+        var alarmRowsDivs = [];
+
+        var saveAlarmButtons = [];
+
+        var alarmNameInputs = [];
+        var alarmTimeInputs = [];
 
 
-//        //audios
-//        var audioTagsDiv = document.getElementById("audio-tags");
-//
-//        alarmNamesAndTimesStorage.map(i => {
-//            var item = getItemWithName(i.alarmName);
-//
-//            if (item == null) {
-//                alert("ERROR");
-//                console.log("error");
-//            } else {
-//                var audioTag = document.createElement("audio");
-//                audioTag.src = item[0].valueItemRowWhat;
-//                audioTag.controls = true;
-//                audioTag.loop = true;
-//                var p = document.createElement("p");
-//                p.innerHTML = "Your browser doesn't support HTML5 audio.";
-//                audioTagsDiv.appendChild(audioTag);
-//                audioTag.appendChild(p);
-//            }
-//
-//        });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//        //checking if alarm to run needed
-//        var alarmNamesAndTimesRunned = alarmNamesAndTimesStorage.map(i => {
-//            var obj =
-//            {
-//                name: i.alarmName,
-//                times: 0,
-//                startedCheckingTime: new Date()
-//            };
-//            return obj;
-//        });
-//
-//        var checkingIfRunAlarmNeeded = setInterval(function () {
-//            var currentTime = new Date();
-//            for (var i = 0; i < alarmNamesAndTimesRunned.length; i++) {
-//                if (getMinutesFromDate(alarmNamesAndTimesRunned[i].startedCheckingTime) <= getMinutesFromString(alarmNamesAndTimesStorage[i].alarmTime) && getMinutesFromDate(new Date()) >= getMinutesFromDate(alarmNamesAndTimesStorage[i].alarmTime) && ++alarmNamesAndTimesRunned[i].times === 1) {
-//
-//                        var item = getItemWithName(alarmNamesAndTimesRunned[i].alarmName);
-//
-//                        if (item == null) {
-//                            alert("ERROR");
-//                            console.log("error");
-//                        } else {
-//                            var audioTag = document.createElement("audio");
-//                            audioTag.src = item[0].valueItemRowWhat;
-//                            audioTag.controls = true;
-//                            audioTag.loop = true;
-//                            var p = document.createElement("p");
-//                            p.innerHTML = "Your browser doesn't support HTML5 audio.";
-//                            audioTagsDiv.appendChild(audioTag);
-//                            audioTag.appendChild(p);
-//                            audioTag.start();
-//                        }
-//
-//                }
-//            }
-//        }, 500);
-//
-//        function getMinutesFromString(date) {
-//            return date.substring(0, 2) * 60 + date.substring(3, 5) * 1;
-//        }
-//
-//        function getMinutesFromDate(date) {
-//            if (typeof date === Date) {
-//                return date.getHours() * 60 + date.getMinutes();
-//            }
-//            
-//        }
+        setAlarmStorage();
+        mapAlarmStorage(alarmStorage);
+        
+        function addNewAlarmRow() {
+            var newAlarmRowDiv = document.createElement("div");
+            newAlarmRowDiv.classList.add("alarm-names-and-times-rows");
+            alarmsDiv.appendChild(newAlarmRowDiv);
+            var alarmRowsDivs[alarmRowDivs.length] = newAlarmRowDiv;
+        }
+
+        function addNewSaveAlarmButton(innnerHtml) {
+            var alarmSaveButton = document.createElement("button");
+            alarmSaveButton.type = "button";
+            alarmSaveButton.classList.add("btn");
+            alarmSaveButton.classList.add("btn-success");
+            alarmSaveButton.classList.add("save-alarm-button");
+            alarmSaveButton.innerHTML = innnerHtml;
+            alarmRowsDivs[alarmRowDivs.length - 1].appendChild(alarmSaveButton);
+            saveAlarmButtons[saveAlarmButtons.length] = alarmSaveButton;
+        }
+
+        function addNewAlarmNameInput(value) {
+            var newAlarmNameInput = document.createElement("input");
+            newAlarmNameInput.type = "text";
+            newAlarmNameInput.classList.add("alarm-name-inputs");
+            newAlarmNameInput.value = value;
+            alarmRowsDivs[alarmRowDivs.length - 1].appendChild(newAlarmNameInput);
+            alarmNameInputs[alarmNameInputs.length] = newAlarmNameInput;
+        }
+
+        function addNewAlarmTimeInput(value) {
+            var newAlarmTimeInput = document.createElement("input");
+            newAlarmTimeInput.type = "text";
+            newAlarmTimeInput.classList.add("alarm-time-inputs");
+            newAlarmTimeInput.value = value;
+            alarmRowsDivs[alarmRowDivs.length - 1].appendChild(newAlarmTimeInput);
+            alarmTimeInputs[alarmTimeInputs.length] = newAlarmTimeInput;
+        }
+
+        
+
+        function setAlarmStorage() {
+            alarmStorage = JSON.parse(localStorage.getItem('alarm-storage'));
+
+            if (!Array.isArray(alarmStorage)) {
+                alarmStorage = [];
+            }
+        }
+
+        function mapAlarmStorage(alarmStorage) {
+            for (var i = 0; i < alarmStorage.length; i++) {
+                addNewAlarmRow();
+                addNewAlarmNameInput(alarmStorage[i].alarmName);
+                addNewAlarmTimeInput(alarmStorage[i].alarmTime);
+                addNewSaveAlarmButton("Save");
+
+            }
+
+            addNewAlarmRow();
+            addNewAlarmNameInput("");
+            addNewAlarmTimeInput("");
+            addNewSaveAlarmButton("Save");
+        }
+
+
+
+        //        var tr = document.createElement("tr");
+        //        var th = document.createElement("th");
+        //        th.innerHTML = "Items";
+        //        var td;
+        //
+        //        itemsTableDiv.appendChild(tr);
+        //        tr.appendChild(th);
+        //
+        //        setAlarmNamesAndTimes();
+        //        console.log(alarmNamesAndTimesStorage);
+        //
+        //        localStorageItems.map(i => {
+        //            tr = document.createElement("tr");
+        //            td = document.createElement("td");
+        //
+        //            itemsTableDiv.appendChild(tr);
+        //            tr.appendChild(td);
+        //            td.innerHTML = i[0].itemName;
+        //        });
+        //
+        //        function setAlarmNamesAndTimes() {
+        //            alarmNamesAndTimesStorage = JSON.parse(localStorage.getItem('alarmNamesAndTimes'));
+        //
+        //            if (!Array.isArray(alarmNamesAndTimesStorage)) {
+        //                alarmNamesAndTimesStorage = [];
+        //            }
+        //        }
+        //
+        //        document.getElementById("alarm-names-and-times").addEventListener("click", function () {
+        //            alarmNamesAndTimesStorage[alarmNamesAndTimesStorage.length] = {
+        //                alarmName: document.getElementsByClassName("alarm-name")[0].value,
+        //                alarmTime: document.getElementsByClassName("when-alarm")[0].value
+        //            };
+        //            localStorage.setItem('alarmNamesAndTimes', JSON.stringify(alarmNamesAndTimesStorage));
+        //            console.log(alarmNamesAndTimesStorage);
+        //            console.log(localStorage.getItem('alarmNamesAndTimes'));
+        //        });
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+
+
+        //        //audios
+        //        var audioTagsDiv = document.getElementById("audio-tags");
+        //
+        //        alarmNamesAndTimesStorage.map(i => {
+        //            var item = getItemWithName(i.alarmName);
+        //
+        //            if (item == null) {
+        //                alert("ERROR");
+        //                console.log("error");
+        //            } else {
+        //                var audioTag = document.createElement("audio");
+        //                audioTag.src = item[0].valueItemRowWhat;
+        //                audioTag.controls = true;
+        //                audioTag.loop = true;
+        //                var p = document.createElement("p");
+        //                p.innerHTML = "Your browser doesn't support HTML5 audio.";
+        //                audioTagsDiv.appendChild(audioTag);
+        //                audioTag.appendChild(p);
+        //            }
+        //
+        //        });
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //        //checking if alarm to run needed
+        //        var alarmNamesAndTimesRunned = alarmNamesAndTimesStorage.map(i => {
+        //            var obj =
+        //            {
+        //                name: i.alarmName,
+        //                times: 0,
+        //                startedCheckingTime: new Date()
+        //            };
+        //            return obj;
+        //        });
+        //
+        //        var checkingIfRunAlarmNeeded = setInterval(function () {
+        //            var currentTime = new Date();
+        //            for (var i = 0; i < alarmNamesAndTimesRunned.length; i++) {
+        //                if (getMinutesFromDate(alarmNamesAndTimesRunned[i].startedCheckingTime) <= getMinutesFromString(alarmNamesAndTimesStorage[i].alarmTime) && getMinutesFromDate(new Date()) >= getMinutesFromDate(alarmNamesAndTimesStorage[i].alarmTime) && ++alarmNamesAndTimesRunned[i].times === 1) {
+        //
+        //                        var item = getItemWithName(alarmNamesAndTimesRunned[i].alarmName);
+        //
+        //                        if (item == null) {
+        //                            alert("ERROR");
+        //                            console.log("error");
+        //                        } else {
+        //                            var audioTag = document.createElement("audio");
+        //                            audioTag.src = item[0].valueItemRowWhat;
+        //                            audioTag.controls = true;
+        //                            audioTag.loop = true;
+        //                            var p = document.createElement("p");
+        //                            p.innerHTML = "Your browser doesn't support HTML5 audio.";
+        //                            audioTagsDiv.appendChild(audioTag);
+        //                            audioTag.appendChild(p);
+        //                            audioTag.start();
+        //                        }
+        //
+        //                }
+        //            }
+        //        }, 500);
+        //
+        //        function getMinutesFromString(date) {
+        //            return date.substring(0, 2) * 60 + date.substring(3, 5) * 1;
+        //        }
+        //
+        //        function getMinutesFromDate(date) {
+        //            if (typeof date === Date) {
+        //                return date.getHours() * 60 + date.getMinutes();
+        //            }
+        //            
+        //        }
     }
 )();

@@ -7,6 +7,7 @@
         var newItemNameInput = document.getElementById("new-item-name");
 
         var inputsItemRowWhat = [];
+        var inputsItemRowItemName = [];
         var inputsItemRowTimes = [];
         var inputsItemRowTimeSec = [];
 
@@ -15,6 +16,7 @@
         //save from these lines to local storage END
 
         var labelsItemRowWhat = [];
+        var labelsItemRowItemName = [];
         var labelsItemRowTimes = [];
         var labelsItemRowTimeSec = [];
 
@@ -53,6 +55,7 @@
             for (var i = 0; i < newItemRowDivs.length - 1; i++) {
                 newItemInfo.rows[i] = {
                     itemRowWhat: inputsItemRowWhat[i].value,
+                    itemRowItemName: inputsItemRowItemName[i].value,
                     valueItemRowTimes: inputsItemRowTimes[i].value,
                     valueItemRowTimeSec: inputsItemRowTimeSec[i].value,
                     clearedValueTimes: clearedValuesTimes[i],
@@ -71,7 +74,7 @@
         }, 1000);
 
         function getTwoNumbers(num) {
-            //function to get from 23 to 23, but from 0 to 00, from 7 to 07... Used for showing time with 2 numbers not 1
+            //function to get from 23 to 23, but from 0 to 00, from 7 to 07... Used for showing time with 2 numbers, not 1
             if (("" + num).length > 1) {
                 return num;
             }
@@ -93,6 +96,7 @@
         function disableAllRowInputs(trueIfTrue, fromIndex) {
             for (var i = fromIndex; i < newItemRowDivs.length; i++) {
                 inputsItemRowWhat[i].disabled = trueIfTrue;
+                inputsItemRowItemName[i].disabled = trueIfTrue;
                 inputsItemRowTimes[i].disabled = trueIfTrue;
                 inputsItemRowTimeSec[i].disabled = trueIfTrue;
             }
@@ -100,12 +104,14 @@
 
         function setNewItemInputs() {
             inputsItemRowWhat = document.getElementsByClassName("item-row-what");
+            inputsItemRowItemName = document.getElementsByClassName("item-row-item-name");
             inputsItemRowTimes = document.getElementsByClassName("item-row-times");
             inputsItemRowTimeSec = document.getElementsByClassName("item-row-time-sec");
         }
 
         function setNewItemLabels() {
             labelsItemRowWhat = document.querySelectorAll("label[for='item-row-what']");
+            labelsItemRowItemName = document.querySelectorAll("label[for='item-row-item-name']");
             labelsItemRowTimes = document.querySelectorAll("label[for='item-row-times']");
             labelsItemRowTimeSec = document.querySelectorAll("label[for='item-row-time-sec']");
         }
@@ -133,6 +139,9 @@
             input2.type = "number";
             input2.min = "0";
             input2.classList.add("item-row-times");
+            var input4 = document.createElement("input");
+            input4.type = "text";
+            input4.classList.add("item-row-item-name");
             var input3 = document.createElement("input");
             input3.type = "number";
             input3.min = "0";
@@ -141,16 +150,21 @@
             var label1 = document.createElement("label");
             label1.for = "item-row-what";
             label1.innerHTML = "Full path in Computer/blank for pause: ";
+            var label4 = document.createElement("label");
+            label4.for = "item-row-item-name";
+            label4.innerHTML = "/ Alarm item name: ";
             var label2 = document.createElement("label");
             label2.for = "item-row-times";
             label2.innerHTML = "Times to repeat: ";
             var label3 = document.createElement("label");
             label3.for = "item-row-time-sec";
-            label3.innerHTML = "Time to play(s): ";
+            label3.innerHTML = "/ Time to play(s): ";
 
 
             newItemRow.appendChild(label1);
             newItemRow.appendChild(input1);
+            newItemRow.appendChild(label4);
+            newItemRow.appendChild(input4);
             newItemRow.appendChild(label2);
             newItemRow.appendChild(input2);
             newItemRow.appendChild(label3);
@@ -161,8 +175,10 @@
 
 
         function isNewItemNewRowNeeded(rowLength) {
-            return (inputsItemRowWhat[rowLength - 1].value !== "" && (inputsItemRowTimes[rowLength - 1].value !== "" || inputsItemRowTimeSec[rowLength - 1].value !== "")) ||
-                (inputsItemRowTimeSec[rowLength - 1].value !== "");
+            console.log("get item with specific name: " + getItemWithName(inputsItemRowItemName[rowLength - 1].value));
+            
+            return (inputsItemRowWhat[rowLength - 1].value !== "" || getItemWithName(inputsItemRowItemName[rowLength - 1].value) != null) && (inputsItemRowTimes[rowLength - 1].value !== "") ||
+                ((inputsItemRowTimeSec[rowLength - 1].value !== "" && inputsItemRowItemName[rowLength - 1].value === "") || (inputsItemRowTimeSec[rowLength - 1].value !== "" && getItemWithName(inputsItemRowItemName[rowLength - 1].value) !== null));
         }
 
         function getNewItemRowCount() {
@@ -172,7 +188,19 @@
         //Now in next 3 function will be used isNewItemNewRowNeeded method, but these times it should check if rowLength would be  equal to how many rows there are, if new row would appear and if not, next rows should become unchangable
         function addActionsToLastRow(rowLength) {
             inputsItemRowWhat[rowLength - 1].addEventListener("keyup", function () {
-
+                inputsItemRowItemName[rowLength - 1].value = "";
+                
+                if (!isNewItemNewRowNeeded(rowLength)) {
+                    disableAllRowInputs(true, rowLength);
+                } else {
+                    disableAllRowInputs(false, rowLength);
+                    newItemRowChange(rowLength - 1);
+                }
+            });
+            
+            inputsItemRowItemName[rowLength - 1].addEventListener("keyup", function() {
+                inputsItemRowWhat[rowLength - 1].value = "";
+                
                 if (!isNewItemNewRowNeeded(rowLength)) {
                     disableAllRowInputs(true, rowLength);
                 } else {

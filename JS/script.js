@@ -471,6 +471,7 @@
                 if (alarmStorage[i].timeLeftMillis + alarmStorage[i].timesRunnedAfterF5 * 1000 * 3600 * 24 <= new Date().getTime() - alarmStorage[i].startedCheckingTime.getTime()) {
                     ++alarmStorage[i].timesRunnedAfterF5;
                     alert("RUN MUSIC");
+                    console.log("RUN MUSIC");
                 }
             }
         }, 5000);

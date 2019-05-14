@@ -417,7 +417,7 @@
         }
 
         function getHoursFromString(string) {
-            return parseInt(string.substring(0, 3));
+            return parseInt(string.substring(0, 2));
         }
 
         function getMinutesFromString(string) {
@@ -476,15 +476,37 @@
             for (var i = 0; i < alarmStorage.length; i++) {
                 console.log(new Date().getTime() - alarmStorage[i].startedCheckingTime.getTime());
                 console.log(alarmStorage[i].timeLeftMillis);
-                
+
                 console.log(`${parseInt(alarmStorage[i].timesRunnedAfterF5) * 1000 * 3600 * 24}`);
 
                 if (alarmStorage[i].timeLeftMillis + alarmStorage[i].timesRunnedAfterF5 * 1000 * 3600 * 24 <= new Date().getTime() - alarmStorage[i].startedCheckingTime.getTime()) {
-                    ++alarmStorage[i].timesRunnedAfterF5;
-                    alert("RUN MUSIC");
-                    console.log("RUN MUSIC");
+                    runAlarm(i);
                 }
             }
         }, 5000);
-    }
-)();
+
+
+            function runAlarm(i) {
+                ++alarmStorage[i].timesRunnedAfterF5;
+                console.log("RUN MUSIC");
+                var audioTag = document.createElement("audio");
+                audioTag.src = alarmStorage[i].itemRowWhat;
+                document.getElementById("audio-tags").appendChild(audioTag);
+                audioTag.play();
+            }
+        
+        var aaaa = document.getElementById("aaaa");
+        aaaa.addEventListener("click", function () {
+                var inputAaaValue = parseInt(document.getElementById("input-aaa").value);
+                
+                    var audioTag = document.createElement("audio");
+                    audioTag.src = "explosion.mp3";
+                    document.getElementById("audio-tags").appendChild(audioTag);
+                    
+            var interval = setInterval(function() {
+                console.log("time passed");
+                audioTag.play();
+                clearInterval(interval);
+            }, inputAaaValue * 1000);
+        });
+        })();

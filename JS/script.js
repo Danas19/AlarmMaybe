@@ -392,6 +392,7 @@
                 addAlarmLabel("alarm time ");
                 addAlarmSpan("(hours:minutes, for ex. 12:57): ");
                 addNewAlarmTimeInput(alarmStorage[i].alarmTime);
+                addAlarmSpan("Inputed hours: " + getHoursFromString(alarmStorage[i].alarmTime) + ", inputed minutes: " + getMinutesFromString(alarmStorage[i].alarmTime));
                 addNewSaveAlarmButton("Save");
 
                 alarmStorage[i].startedCheckingTime = new Date();
@@ -399,6 +400,14 @@
                 timesRunnedAfterF5 = 0 * 0;
 
                 console.log(alarmStorage[i].startedCheckingTime);
+            }
+            
+            function getHoursFromString(string) {
+                return parseInt(string.substring(0, 3));
+            }
+            
+            function getMinutesFromString(string) {
+                return parseInt(string.substring(3, 5));
             }
 
             addNewAlarmRow();

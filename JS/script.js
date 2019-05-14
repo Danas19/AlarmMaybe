@@ -56,6 +56,7 @@
                     valueItemRowTimeSec: inputsItemRowTimeSec[i].value,
                     startedCheckingTime: "",
                     timeLeftMillis: "",
+                    timesRunnedAfterF5: parseInt(0),
                     clearedValueTimes: clearedValuesTimes[i],
                     clearedValueTimeSec: clearedValuesTimeSec[i]
                 };
@@ -395,6 +396,7 @@
 
                 alarmStorage[i].startedCheckingTime = new Date();
                 setAlarmStorageTimeLeft(i);
+                timesRunnedAfterF5 = 0 * 0;
 
                 console.log(alarmStorage[i].startedCheckingTime);
             }
@@ -466,7 +468,8 @@
                 console.log(new Date().getTime() - alarmStorage[i].startedCheckingTime.getTime());
                 console.log(alarmStorage[i].timeLeftMillis);
 
-                if (alarmStorage[i].timeLeftMillis <= new Date().getTime() - alarmStorage[i].startedCheckingTime.getTime()) {
+                if (alarmStorage[i].timeLeftMillis + alarmStorage[i].timesRunnedAfterF5 * 1000 * 3600 * 24 <= new Date().getTime() - alarmStorage[i].startedCheckingTime.getTime()) {
+                    ++alarmStorage[i].timesRunnedAfterF5;
                     alert("RUN MUSIC");
                 }
             }

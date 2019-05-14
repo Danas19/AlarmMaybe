@@ -401,14 +401,6 @@
 
                 console.log(alarmStorage[i].startedCheckingTime);
             }
-            
-            function getHoursFromString(string) {
-                return parseInt(string.substring(0, 3));
-            }
-            
-            function getMinutesFromString(string) {
-                return parseInt(string.substring(3, 5));
-            }
 
             addNewAlarmRow();
             addAlarmLabel("alarm name: ");
@@ -424,14 +416,22 @@
             addNewSaveAlarmButton("Save all");
         }
 
+        function getHoursFromString(string) {
+            return parseInt(string.substring(0, 3));
+        }
+
+        function getMinutesFromString(string) {
+            return parseInt(string.substring(3, 5));
+        }
+
         function setAlarmStorageTimeLeft(i) {
-            timeLeft = (alarmStorage[i].alarmTime.substring(0, 3) * 60 + alarmStorage[i].alarmTime.substring(3, 5) - alarmStorage[i].startedCheckingTime.getHours() * 60 - alarmStorage[i].startedCheckingTime.getMinutes());
+            timeLeft = (getHoursFromString(alarmStorage[i].alarmTime) * 60 + getMinutesFromString(alarmStorage[i].alarmTime) - alarmStorage[i].startedCheckingTime.getHours() * 60 - alarmStorage[i].startedCheckingTime.getMinutes());
 
             if (timeLeft < 0) {
                 timeLeft = 24 * 60 + timeLeft;
             }
 
-            timeLeft *= 1000;
+            timeLeft *= 1000 * 60;
             alarmStorage[i].timeLeftMillis = timeLeft;
         }
 

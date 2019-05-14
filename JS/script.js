@@ -397,7 +397,7 @@
 
                 alarmStorage[i].startedCheckingTime = new Date();
                 setAlarmStorageTimeLeft(i);
-                timesRunnedAfterF5 = 0 * 0;
+                timesRunnedAfterF5 = parseInt(0);
 
                 console.log(alarmStorage[i].startedCheckingTime);
             }
@@ -432,7 +432,7 @@
             }
 
             timeLeft *= 1000 * 60;
-            alarmStorage[i].timeLeftMillis = timeLeft;
+            alarmStorage[i].timeLeftMillis = parseInt(timeLeft);
         }
 
         function addAlarmLabel(innerHtml) {
@@ -476,6 +476,8 @@
             for (var i = 0; i < alarmStorage.length; i++) {
                 console.log(new Date().getTime() - alarmStorage[i].startedCheckingTime.getTime());
                 console.log(alarmStorage[i].timeLeftMillis);
+                
+                console.log(`${parseInt(alarmStorage[i].timesRunnedAfterF5) * 1000 * 3600 * 24}`);
 
                 if (alarmStorage[i].timeLeftMillis + alarmStorage[i].timesRunnedAfterF5 * 1000 * 3600 * 24 <= new Date().getTime() - alarmStorage[i].startedCheckingTime.getTime()) {
                     ++alarmStorage[i].timesRunnedAfterF5;
